@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Cardápio Digital</title>
+
+    </head>
+    <style type="text/css">
+        .ReadMsgBody {
+            width: 100%;
+        }
+
+        .ExternalClass {
+            width: 100%;
+        }
+
+    </style>
+    <body>
+        <table width="100%" border="0">
+            <tr>
+                <td width="80%"><img
+                        src="<?php echo $this->logo; ?>"
+                        alt="<?php echo $this->rs['restaurant_name']; ?>"/></td>
+                <td width="20%">
+                    ID da Transação: <?php echo $this->rs['id']; ?> <br />
+                    <?php
+                    $data = explode(' ', $this->rs['datetime_creation']);
+                    $Data = explode('-', $data[0]);
+                    $novaData = $Data[2] . '/' . $Data[1] . '/' . $Data[0] . ' ' . $data[1];
+                    echo $novaData;
+                    ?>
+                </td>
+            </tr>
+        </table>
+        <p></p>
+        <p>Sua compra foi confirmada</p>
+        <p style="font-size:14px"><b>Confira abaixo os dados da transação e caso necessário entre em contato através do email <?php echo $this->rs['restaurant_email']; ?></b></p>
+        <p></p>
+
+
+        <table width="620" border="1" bordercolor="#FFF" align="center" cellpadding="20" cellspacing="0" bgcolor="#FFFFFF">
+            <tr>
+                <td>Título</td>
+                <td>Quantidade</td>
+                <td>Total</td>
+            </tr>
+            <?php
+            $custoItens = 0;
+            if (count($this->rs ['items']) > 0) {
+                foreach ($this->rs ['items'] as $item) :
+                    ?>
+                    <tr>
+                        <td>
+                            <?php
+                            echo $item ['item'];
+                            $custoAdicionais = 0;
+                            if (count($item ['additionals']) > 0) {
+                                ?>
+                                <p></p>
+                                <p><strong>Adicionais:</strong></p>
+                                <ul>
+                                    <?php
+                                    foreach ($item ['additionals'] as $additional) {
+                                        $custoAdicionais += $additional ['value'];
+                                        ?>
+                                        <li><?php echo $additional['title']; ?> (+ R$ <?php echo number_format($additional['value'], 2, ',', '.'); ?>)</li>
+                                    <?php } ?>
+                                </ul>
+                            <?php } ?>
+
+                            <?php if (count($item ['accompaniments']) > 0) { ?>
+                                <p></p>
+                                <p><strong>Acompanhamentos:</strong></p>
+                                <ul>
+                                    <?php foreach ($item['accompaniments'] as $accompaniment) { ?>
+                                        <li><?php echo $accompaniment['title'] ?></li>
+                                    <?php } ?>
+                                </ul>
+                            <?php } ?>
+
+                            <p></p>
+                            <?php if (!empty($item['observation'])) { ?>
+                                <p><strong>Observação:</strong></p>
+                                <p><?php echo $item['observation']; ?></p>
+                            <?php } ?>
+
+                        </td>
+
+                        <td><?php echo $item['amount']; ?></td>
+
+                        <td>R$
+                            <?php
+                            $total = ($item ['amount'] * $item ['value']) + $custoAdicionais;
+                            $custoItens += $total;
+                            echo number_format($total, 2, ',', '.');
+                            ?>
+                        </td>
+
+                    </tr>
+                    <?php
+                endforeach;
+            }
+            ?>
+            <tr>
+                <td colspan="2">Taxa de Serviço</td>
+                <td>
+                    R$<?php echo number_format($this->rs['tax_value'], 2, ',', '.'); ?>
+                </td>
+            </tr>
+
+            <?php if (!empty($this->rs['shipping_value'])): ?>
+                <tr>
+                    <td colspan="2">Taxa de Entrega</td>
+                    <td>
+                        R$<?php echo number_format($this->rs['shipping_value'], 2, ',', '.'); ?>
+                    </td>
+                </tr>
+            <?php endif; ?>
+
+            <tr>
+                <td colspan="2">Total:</td>
+                <td>R$<?php echo number_format($this->rs['total'], 2, ',', '.'); ?></td>
+            </tr>
+            
+             <?php if (!empty($this->rs['shipping_address'])): ?>
+                <tr>
+                    <td colspan="3">
+                        <p>Endereço de Entrega:</p>
+                        <p style="font-size:14px"><b><?php echo $this->rs['shipping_address']['street'] . ', ' . $this->rs['shipping_address']['number']; 
+                        if(!empty($this->rs['shipping_address']['complement'])){ echo ' - ' . $this->rs['shipping_address']['complement']; }
+                        echo ' - '. $this->rs['shipping_address']['cep'];
+                        echo ' - ' . $this->rs['shipping_address']['neighborhood'] . ' - ' . $this->rs['shipping_address']['city']. ' - ' . $this->rs['shipping_address']['state']; ?></b></p>
+                    </td>
+                </tr>
+            <?php endif; ?>
+
+            
+        </table>
+        <p>Importante: Este pagamento será registrado na fatura do seu cartão de crédito como <strong><?php echo $this->empresaFatura; ?></strong> .</p>
+
+    </body>
+</html>

@@ -1,0 +1,314 @@
+<div class="row">
+    <div class="col-lg-12">
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="clearfix">
+                    <h1 class="pull-left"><?php echo $this->nome; ?></h1>
+                </div>
+            </div>
+        </div>
+
+		<div class="row">
+            <div class="col-lg-12">
+                <div class="main-box no-header clearfix">
+                    <div class="main-box-body clearfix">
+                        <div class="table-responsive">
+                            <table class="table user-list">
+                                <thead>
+                                    <tr>
+                                        <th>Descrição</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    if ((count($this->rs) > 0) && ($this->rs != false)) {
+                                        $i=1;
+                                        foreach ($this->rs as $rs):
+                                       		
+                                        	$rs['descricao'] = utf8_encode($rs['descricao']);
+                                            ?>
+                                            <tr>
+                                                
+                                                <td><?php echo $rs['descricao']; ?></td>
+                                                
+                                                <td style="width: 9%">
+	                                                <a href="<?php echo $this->baseUrl('/admin/acomodacoes/editar-conteudo/id/'.$rs['id'].'/idconteudo/'.$rs['id_conteudo'])?>" class="table-link">
+														<span class="fa-stack">
+															<i class="fa fa-square fa-stack-2x"></i>
+															<i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+														</span>
+													</a>
+													
+                                                </td>
+                                            </tr>
+                                            <?php
+                                                $i++;
+                                        endforeach;
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 column">
+                <div class="main-box no-header clearfix">
+                    <div class="main-box-body clearfix">
+        				<div class="table-responsive">
+                            <table class="table user-list">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Imagem/Video</th>
+                                        <th>Destaque</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    if ((count($this->galeria) > 0) && ($this->galeria != false)) {
+                                        $i=1;
+                                        foreach ($this->galeria as $rs):
+                                            ?>
+                                            <tr>
+                                                <td><?php echo $i; ?></td>
+                                                <td>
+                                                	<?php if($rs['imagem'] != '' || $rs['video'] != ''){?>
+                                                		<a class="fancybox-media" href="<?php echo $rs['imagem'] != '' ?$this->baseUrl('/'.$rs['imagem']):$rs['video'] ?>" ><img style="width:100px;height:100px" src="<?php echo $rs['imagem'] != '' ?$this->baseUrl('/'.$rs['imagem']):$this->baseUrl('/'.$rs['imagem_video']); ?>" alt="" /></a>
+                                                	<?php }?>
+                                                </td>
+                                                <td><?php echo $rs['destaque'] == 1? 'Sim': 'Não' ?></td>
+                                                <td>
+	                                                <a href="<?php echo $this->baseUrl('/admin/acomodacoes/editar-galeria/id/'.$rs['id'].'/idgaleria/'.$rs['id_galeria'])?>" class="table-link">
+														<span class="fa-stack">
+															<i class="fa fa-square fa-stack-2x"></i>
+															<i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+														</span>
+													</a>
+													<a href="<?php echo $this->baseUrl('/admin/acomodacoes/remover-galeria/id/'.$rs['id'].'/idgaleria/'.$rs['id_galeria'])?>" onclick="return confirm('Tem certeza que deseja remover?')" class="table-link danger">
+														<span class="fa-stack">
+															<i class="fa fa-square fa-stack-2x"></i>
+															<i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+														</span>
+													</a>
+													
+													
+                                                </td>
+                                            </tr>
+                                            <?php
+                                                $i++;
+                                        endforeach;
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6 column">
+                <div class="main-box no-header clearfix">
+                    <div class="main-box-body clearfix">
+        				<div class="table-responsive">
+                            <h4><strong>Itens Quarto</strong></h4>
+                            	<div class="table-responsive">
+	                            	<table class="table user-list">
+		                                <thead>
+		                                    <tr>
+		                                        <th></th>
+		                                        <th></th>
+		                                    </tr>
+		                                </thead>
+		                                <tbody>
+		                                	<tr>
+		                                		<td>
+		                                     	<input type="text" name="item" class="form-control" id="item"  maxlength="61" required>
+		                                     	</td>
+		                                     	<td>
+		                                     		<button class="btn btn-primary btn-xs" id="btn">
+														<span class="fa-stack">
+															
+															<i class="fa fa-plus fa-stack-1x fa-inverse"></i>
+														</span>
+													</button>
+		                                     	</td>
+		                                     </tr>
+		                                </tbody>
+	                            	</table>
+                        		</div>
+                        		<div id="teste">
+			                       	<table class="table-condensed ">
+										<thead>
+											<tr>
+												<th style="width: 100%">
+													Nome
+												</th>
+												<th>
+												</th>
+												
+											</tr>
+										</thead>
+										<tbody>
+										
+										</tbody>
+									</table>
+                        		
+                        		</div>
+                       	</div>
+					</div>
+				</div>
+			</div>			
+		</div>
+		<div style="display: none;"> 
+		<div class="row">
+			<div class="col-md-12 column">
+				<div class="main-box no-header clearfix">
+                    <div class="main-box-body clearfix">
+                    	 <a href="<?php echo $this->baseUrl('/admin/acomodacoes/editar-preco/id/'.$this->id)?>" class="btn btn-primary ">Editar
+                    	 	<span class="fa-stack">
+								<i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+							</span>
+						</a><br><br>
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th>
+										Estação
+									</th>
+									<th>
+										Mês
+									</th>
+									<?php if($this->id == 5){?>
+									<th colspan="2">
+										PREÇO ÚNICO (ATÉ 4 PESSOAS) 
+									</th>
+									<?php }else{?>
+									<th>
+										DBL
+									</th>
+									<th>
+										TPL
+									</th>
+									<?php }?>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><?php echo $this->preco['estacao_baixa']?></td>
+									<td><?php echo utf8_encode($this->preco['mes_baixa'])?></td>
+									<?php if($this->id == 5){?>
+									<td colspan="2">
+										<?php echo utf8_encode($this->preco['dbl_baixa'])?>
+									</td>
+									<?php }else{?>
+									<td><?php echo utf8_encode($this->preco['dbl_baixa'])?></td>
+									<td><?php echo utf8_encode($this->preco['tpl_baixa'])?></td>
+									<?php }?>
+								</tr>
+								<tr>
+									<td><?php echo $this->preco['estacao_alta']?></td>
+									<td><?php echo utf8_encode($this->preco['mes_alta'])?></td>
+									<?php if($this->id == 5){?>
+									<td colspan="2">
+										<?php echo utf8_encode($this->preco['dbl_alta'])?>
+									</td>
+									<?php }else{?>
+									<td><?php echo utf8_encode($this->preco['dbl_alta'])?></td>
+									<td><?php echo utf8_encode($this->preco['tpl_alta'])?></td>
+									<?php }?>
+								</tr>
+								<tr>
+									<td><?php echo utf8_encode($this->preco['estacao_media'])?></td>
+									<td><?php echo utf8_encode($this->preco['mes_media'])?></td>
+									<?php if($this->id == 5){?>
+									<td colspan="2">
+										<?php echo utf8_encode($this->preco['dbl_media'])?>
+									</td>
+									<?php }else{?>
+									<td><?php echo utf8_encode($this->preco['dbl_media'])?></td>
+									<td><?php echo utf8_encode($this->preco['tpl_media'])?></td>
+									<?php }?>
+								</tr>
+							</tbody>
+						</table>
+				</div>
+			</div>
+		</div>	
+    </div>
+    </div>
+</div>
+<script type="text/javascript" src="<?php echo $this->baseUrl('/source/jquery.fancybox.js?v=2.1.5')?>"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl('source/helpers/jquery.fancybox-media.js?v=1.0.6')?>"></script>
+<script type="text/javascript">
+	$('.fancybox-media').fancybox({
+		openEffect  : 'none',
+		closeEffect : 'none',
+		helpers : {
+			media : {}
+		}
+	});
+
+                                    
+	var count;
+     var id =<?php echo $this->id;?>;
+     $(window).load(function($){
+			listaItem();
+         });
+                    
+	$('#btn').on('click', function() {
+	    var nome = $('#item').val();
+	    if(nome == ''){
+		    alert('Digite algum texto no campo!');
+		    return;
+	    }
+	    if(count == 18){
+	    	alert('Número máximo de item atingido!');
+		    return;
+		 }
+	    $.ajax({
+	                url: '<?php echo $this->baseUrl('/admin/acomodacoes/additem');?>', // point to server-side PHP script 
+	                dataType: 'json',  // what to expect back from the PHP script, if anythin
+	                data: {nome:nome,id:id},                         
+	                type: 'post',
+	                success: function(response){
+	                	$("#item").val( '' ); 
+	                	listaItem();                	
+	                    
+	                }
+	     });
+	});	
+
+function listaItem(){
+	$.ajax({
+        url: '<?php echo $this->baseUrl('/admin/acomodacoes/listaitem');?>', // point to server-side PHP script 
+        dataType: 'json',  // what to expect back from the PHP script, if anythin
+        data: {id:id},                         
+        type: 'post',
+        success: function(response){
+            var html;
+            count = response.length;
+        	for (index = 0; index < response.length; ++index) {
+        		html +="<tr><td>"+response[index].nome_item+"</td><td><input type='hidden' id='idItem' name='idItem' value='"+response[index].id_item+"' /><button class='btn btn-danger btn-xs' id='btnExcluir' onclick='javascript:excluirItem("+response[index].id_item+");' ><span class='fa-stack'><i class='fa-stack-2x'></i><i class='fa fa-trash-o fa-stack-1x fa-inverse'></i></span></button></td></tr>";
+        	}
+        	if(count == 0){
+				html = "<p>Nenhum item cadastrado!</p>";	
+            }	
+			html +="<script type='text/javascript'>function excluirItem(idItem){$.ajax({url: '<?php echo $this->baseUrl('/admin/acomodacoes/removeritem');?>', dataType: 'json', data: {id:idItem},type: 'post',success: function(response){$('#item').val( '' );listaItem();}});}<\/\script>";
+        	
+        	$("#teste tbody").html(html);
+        	
+        	
+            
+        }
+	});
+}
+
+
+
+</script>
+	

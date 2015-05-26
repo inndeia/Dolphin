@@ -1,0 +1,155 @@
+<?php require_once('head_internas.php'); ?> <!--head_internas-->
+<?php require_once('header_internas.php'); ?>
+
+<div class="content_title"  style="background-image:url(<?php echo $this->baseUrl('images/dolphin.png')?>)">
+	<figure class="img_title"><img src="<?php echo $this->baseUrl('images/h2_ilha.png')?>"> </figure>
+	<h2> dolphin Hotel </h2>
+</div>  <!--content_title-->
+<div id="seta">
+	<a href="#content_conteudo1" class="scroll"><img src="<?php echo $this->baseUrl('/images/arrow_bottom.png')?>"></a>
+</div>
+<?php if($this->rs[0]['imagem'] == ''){?>
+			<div id="content_conteudo1" class="content_conteudo1 left"  style="background-image:url(<?php echo $this->baseUrl('/'.$this->rs[0]['imagem_video']) ?>);">
+				<?php 
+				if(strripos($this->rs[0]['video'], 'vimeo') != 0){
+							$autoplay = $this->rs[0]['autoplayer'] == "1"?"?autoplay=1":"";
+							$exp = explode("/", $this->rs[0]['video']);
+							$count= count($exp);
+							$exp = $exp[$count-1];
+							$video = "//player.vimeo.com/video/".$exp.$autoplay;
+						}else{
+							$autoplay = $this->rs[0]['autoplayer'] == "1"?"&autoplay=1":"";
+							$exp = explode("?v=", $this->rs[0]['video']);
+							$count= count($exp);
+							$exp = $exp[$count-1];
+							$exp = explode("&", $exp);
+							$exp = $exp[0];
+							$video = "http://www.youtube.com/embed/".$exp."?controls=0&showinfo=0".$autoplay;
+								
+						}?>
+				 <iframe id="player" type="text/html" width="100%" height="710"
+				  src="<?php echo $video;?>"
+				  frameborder="0"></iframe>			
+				
+						
+			</div> <!--content_conteudo1-->
+			
+		<?php }else{?>
+				<div class="content_conteudo1 left"  style="background-image:url(<?php echo $this->baseUrl('/'.$this->rs[0]['imagem']) ?>)">
+				</div> <!--content_conteudo2-->
+		
+<?php }?>
+
+<div class="content_conteudo1 right">
+	<div class="conteudo">
+		<h3><?php echo utf8_encode($this->rs[0]['titulo']);?></h3>
+		<p> <?php echo utf8_encode($this->rs[0]['descricao']);?></p>
+		<div class="box_galeria" style="margin-top:20px;">
+			
+<!-- Galeria -->
+		<div id="vlightbox1">
+		<?php for($i=0;count($this->galeria)>$i;$i++){
+					if($this->galeria[$i]['imagem'] != "" || $this->galeria[$i]['video'] != ""){
+						
+				
+			?>
+			<a class="fancybox-media" rel="galeria" href="<?php echo $this->galeria[$i]['imagem'] != ''?$this->baseUrl('/'.$this->galeria[$i]['imagem']) : $this->baseUrl('/'.$this->galeria[$i]['video'])?>" ><img style="width:120px;height:120px" src="<?php echo $this->galeria[$i]['imagem'] != ''?$this->baseUrl('/'.$this->galeria[$i]['imagem']) : $this->baseUrl('/'.$this->galeria[$i]['imagem_video'])?>" alt="" /></a>
+			
+		<?php 		}
+			}?>	
+<!-- 				<a class="vlightbox1" href="videos/restaurante.mp4" title="titulo"> -->
+<!-- 				<img src="images/0340.jpg"/></a>	 -->
+			</div>
+			
+			
+			
+<!-- 			<script src="index_files/vlb_engine/thumbscript1.js" type="text/javascript"></script> -->
+<!-- 			<script src="index_files/vlb_engine/vlbdata1.js" type="text/javascript"></script> -->
+<!-- End Galeria -->
+		</div>	
+
+	</div>
+</div> <!--content_conteudo1-->
+
+<div class="content_title title2" style="background-image:url(<?php echo $this->baseUrl('images/ilha1.jpg')?>)">
+	<h4> Localizado no refúgio ecológico mais exclusivo do Brasil: </h4>
+	<h5> Ilha de Fernando de Noronha </h5>
+</div>  <!--content_title-->
+
+<div class="content_conteudo2 left">
+	<div class="conteudo right">
+		<h3><?php echo utf8_encode($this->rs[1]['titulo']);?></h3>
+		<p><?php echo utf8_encode($this->rs[1]['descricao']);?></p>
+		<div id="vlightbox1">
+		<?php for($i=0;count($this->galeriaEstrutura)>$i;$i++){
+					if($this->galeriaEstrutura[$i]['imagem'] != "" || $this->galeriaEstrutura[$i]['video'] != ""){
+						
+				
+			?>
+			<a class="fancybox-media" rel="galeria" href="<?php echo $this->galeriaEstrutura[$i]['imagem'] != ''?$this->baseUrl('/'.$this->galeriaEstrutura[$i]['imagem']) : $this->baseUrl('/'.$this->galeriaEstrutura[$i]['video'])?>" ><img style="width:120px;height:120px" src="<?php echo $this->galeriaEstrutura[$i]['imagem'] != ''?$this->baseUrl('/'.$this->galeriaEstrutura[$i]['imagem']) : $this->baseUrl('/'.$this->galeriaEstrutura[$i]['imagem_video'])?>" alt="" /></a>
+			
+		<?php 		}
+			}?>	
+<!-- 				<a class="vlightbox1" href="videos/restaurante.mp4" title="titulo"> -->
+<!-- 				<img src="images/0340.jpg"/></a>	 -->
+			</div>
+	</div>
+</div> <!--content_conteudo2-->
+
+<div class="content_conteudo2 right"  style="background-image:url(<?php echo $this->baseUrl($this->rs[1]['imagem']);?>)">
+</div> <!--content_conteudo2-->
+
+<div class="content_conteudo2 left"  style="background-image:url(<?php echo $this->baseUrl($this->rs[2]['imagem']);?>)">
+</div> <!--content_conteudo2-->
+
+<div class="content_conteudo2 right">
+	<div class="conteudo">
+		<h3><?php echo utf8_encode($this->rs[2]['titulo']);?></h3>
+		<p><?php echo utf8_encode($this->rs[2]['descricao']);?></p>
+		<a class="btn1" href="<?php echo $this->baseUrl("/reservas")?>"> faça sua reserva !</a>
+	</div>
+</div> <!--content_conteudo2-->
+
+<div class="title">
+	<h6>
+	<img src="<?php echo $this->baseUrl('images/ico_onda.png')?>" style="margin:0 5px 5px 0">
+	<strong>Como</strong> chegar ?
+	<img src="<?php echo $this->baseUrl('images/ico_onda.png')?>" style="margin:0 0 5px 5px">
+	</h6>
+</div>  <!--content_title-->
+
+<div class="content_mapa"> 
+
+</div> <!--content_mapa-->
+<script type="text/javascript" src="<?php echo $this->baseUrl('/source/jquery.fancybox.js?v=2.1.5')?>"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl('/source/helpers/jquery.fancybox-media.js?v=1.0.6')?>"></script>
+<script type="text/javascript">
+
+	$('.fancybox-media').fancybox({
+		openEffect  : 'none',
+		closeEffect : 'none',
+		helpers : {
+			media : {}
+		}
+	});
+	</script>
+<script type="text/javascript">
+$(document).ready(function() {   
+		$(".scroll").click(function(event){        
+	        event.preventDefault();
+	        $('html,body').animate({scrollTop:$(this.hash).offset().top}, 800);
+	   });
+	  function animateDivers() {
+		  setTimeout(function(){
+			  $('#seta').animate({'margin-top':'0px'},70).animate({'margin-top':'25px'},110, animateDivers); 
+			}, 800);	   
+	  }
+	  animateDivers();
+
+	  
+	}); 
+	
+</script>
+<?php require_once('rodape_reservas.php'); ?> <!--rodape_reservas-->
+<?php require_once('rodape.php'); ?> <!--rodape-->
+

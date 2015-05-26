@@ -1,0 +1,127 @@
+<?php
+function converteStatus ($status)
+    {
+    	if ($status == '1') {
+    		return 'Processando';
+    	}elseif ($status == '2') {
+    		return 'Pago';
+    	}elseif ($status == '3') {
+    		return 'Pagamento Rejeitado';
+    	}elseif ($status == '4') {
+    		return 'Confirmado';
+    	}elseif ($status == '5') {
+    		return 'Rejeitado';
+    	}elseif ($status == '6') {
+    		return 'Completo';
+    	}
+    }
+    
+    function converteDataHora ($data)
+    {
+        $data = explode(' ', $data);
+        $Data = explode('-', $data[0]);
+        return $Data[2] . '/' . $Data[1] . '/' . $Data[0] . ' ' . $data[1];
+    }
+
+?><!DOCTYPE html>
+<html lang="en">
+	<head>
+            <title>NaPraça Admin</title>
+            <meta charset="UTF-8" />
+	</head>
+        <style type="text/css">
+.ReadMsgBody {
+	width: 100%;
+}
+
+.ExternalClass {
+	width: 100%;
+}
+
+</style>
+	<body>
+	<h1>Pedidos - <?php echo $this->restaurant['name']?></h1>
+        
+        <h3>Pedidos dos últimos 3 dias</h3>
+        
+        <?php if ( (count($this->workers)>0) && ($this->workers != false)){
+                        foreach ($this->workers as $worker):?>
+        
+        <h3><?php echo $worker['name']; ?></h3>
+        <?php if ( (count($worker['orders'])>0) && ($worker['orders'] != false)){
+            ?>
+        <table width="720" border="1" bordercolor="#ccc" align="center" cellpadding="4" cellspacing="0" bgcolor="#FFFFFF">
+            <tr>
+               <td width="20px"><strong>#</strong></td>
+              <td width="200px"><strong>Nome do Cliente</strong></td> 
+              <td width="300px"><strong>Pedido</strong></td>
+              <td width="60px"><strong>Data</strong></td>
+              <td width="40px"><strong>Status</strong></td>
+              <td width="60px"><strong>Bandeira</strong></td>
+              <td width="80px"><strong>Total</strong></td>
+            </tr>
+                
+                        <?php foreach ($worker['orders'] as $rs):?>
+                        <tr>
+                                <td><?php echo $rs['id']; ?></td>
+                                <td><?php echo $rs['user_name']; ?></td>
+                                <td>
+                                    <?php
+					if (count($rs['items']) > 0){
+                                            foreach ($rs['items'] as $item):?>
+                                         
+                                            <p> <?php echo $item['item']; ?> </p>
+                                            <?php 
+                                            $custoAdicionais = 0;
+                                            if (count($item['additionals'])>0){
+                                            ?>
+                                            <p></p>
+                                            <p><strong>Adicionais:</strong> </p>
+                                            <ul>
+                                            <?php  
+                                            foreach ($item['additionals'] as $additional){
+                                                   $custoAdicionais += $additional['value'];
+                                            ?>
+                                                   <li><?php echo $additional['title']; ?> (+ R$ <?php echo number_format($additional['value'], 2, ',', '.'); ?>)</li>
+                                                   <?php }?>
+                                            </ul>
+                                            <?php }?>
+
+                                            <?php if (count($item['accompaniments'])>0){
+                                            ?>
+                                            <p></p>
+                                            <p><strong>Acompanhamentos:</strong> </p>
+                                            <ul>
+                                            <?php foreach ($item['accompaniments'] as $accompaniment){?>
+                                                   <li><?php echo $accompaniment['title']?></li>
+                                                   <?php }?>
+                                            </ul>
+                                            <?php }?>
+                                            <p></p>
+                                            <?php if (!empty($item['observation'])){?>
+                                            <p><strong>Observação:</strong> </p>
+                                            <p><?php echo $item['observation']; ?></p>
+                                            <?php }?>
+				<?php endforeach;
+                                } ?>
+                                    
+                                    
+                                </td>
+                                <td><?php echo converteDataHora($rs['datetime_creation']); ?></td>
+                                <td><?php echo converteStatus($rs['status']); ?></td>
+                                <td><?php echo $rs['flag']; ?></td>
+                                <td><?php $total = (float) $rs['total'] - (float) $rs['tax_value']; echo number_format($total, 2, ',', '.'); ?></td>
+                        </tr>
+                        <?php endforeach;
+                ?>
+                        
+        </table>
+        <?php } else{ echo 'Este Funcionário não atendeu pedidos neste período.'; }?>
+        
+        <?php           endforeach;
+        } ?>
+        
+        
+	</body>
+</html>
+		

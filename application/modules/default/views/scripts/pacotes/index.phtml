@@ -1,0 +1,62 @@
+<?php require_once('head_internas.php'); ?> <!--head_internas-->
+<?php require_once('header_internas.php'); ?>
+<div class="content_title"  style="background-image:url(<?php echo $this->baseUrl('images/pacotes.jpg');?>)">
+	<figure class="img_title"><img src="<?php echo $this->baseUrl('images/ico_pacotes.png');?>"> </figure>
+	<h2>Pacotes</h2>
+</div>  <!--content_title-->
+<div id="seta">
+	<a href="#container_tarifas" class="scroll"><img src="<?php echo $this->baseUrl('/images/arrow_bottom.png')?>"></a>
+</div>
+<div class="container_tarifas">
+	<div class="content_tarifas" id="content_tarifas">
+		<h1>Pacotes</h1>
+		<div class="content_promocoes">
+			<div class="liquid-slider"  id="slider-id">
+		        
+		          <?php foreach ($this->pacote as $pacote){ ?> 
+			        <div>
+				          <div class="img_promocaonew" style="background-image: url(<?php echo $this->baseUrl($pacote['imagem_banner']);?>)">
+				          </div> <!-- Banner Promoções -->
+				          <div class="ntg">
+								<?php echo utf8_encode($pacote['texto']);?>
+						 </div>
+						 <div style="margin-left:40%;float:left">
+							 <form method="post" action="<?php echo $this->baseUrl("/reservas");?>">							    
+							    <button class="btn2" type="submit">Faça sua reserva!</button>
+						    </form>
+					    </div>
+			         </div>
+		         <?php }?>
+		          
+      		</div>
+      	</div> <!--content_promocoes-->	
+      	<p> <strong>*Observações: </strong></p>
+		<div class="ntp">
+			<?php echo utf8_encode($this->conteudo[0]['texto']);?>
+		</div>	
+	</div> <!--content_tarifas-->
+</div> <!--container_tarifas-->
+<script type="text/javascript">
+	$('.ntg table').css('width','');
+	$('.ntg table').css('height','');
+</script>
+<script type="text/javascript">
+$(document).ready(function() {   
+		$(".scroll").click(function(event){        
+	        event.preventDefault();
+	        $('html,body').animate({scrollTop:$(this.hash).offset().top}, 800);
+	   });
+	  function animateDivers() {
+		  setTimeout(function(){
+			  $('#seta').animate({'margin-top':'0px'},70).animate({'margin-top':'25px'},110, animateDivers); 
+			}, 800);	   
+	  }
+	  animateDivers();
+
+	  
+	}); 
+	
+</script>
+<?php require_once('rodape_reservas.php'); ?> <!--rodape_reservas-->
+<?php require_once('rodape.php'); ?> <!--rodape-->
+

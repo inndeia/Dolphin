@@ -1,0 +1,69 @@
+<?php require_once('head_internas.php'); ?> <!--head_internas-->
+<?php require_once('header_internas.php'); ?>
+
+<div class="content_title"  style="background-image:url(<?php echo $this->baseUrl('images/contato.jpg'); ?>)">
+	<figure class="img_title"><img src="<?php echo $this->baseUrl('images/ico_contato.png'); ?>"> </figure>
+	<h2> Contato </h2>
+</div>  <!--content_title-->
+<div id="seta">
+	<a href="#fale_conosco" class="scroll"><img src="<?php echo $this->baseUrl('/images/arrow_bottom.png')?>"></a>
+</div>
+<div class="container_contato">
+	<div class="content_contato">
+		<div class="fale_conosco" id="fale_conosco"> 
+			<span class="title_contato">fale conosco </span>
+			<form method="post">
+				<label> Nome:* </label>
+				<input type="text" name="nome" required>
+				<label> Email:* </label>
+				<input type="email" name="email" required>
+				<label> Telefone:* </label>
+				<input type="text" name="telefone" required>
+				<label> Assunto:* </label>
+				<select name="assunto" required>
+					<option value="">Selecione...</option>
+					<option value="1">Eventos</option>
+					<option value="2">Orçamentos</option>
+					<option value="3">Dúvidas</option>
+					<option value="4">Reclamações</option>
+					<option value="5">Sugestões</option>
+					<option value="6">Pacotes</option>
+					<option value="7">Trabalhe Conosco</option>
+					<option value="8">Outros</option>				
+				</select>
+				<label> Mensagem:* </label>
+				<textarea name="mensagem" required></textarea>
+				<button class="btn2 left">Enviar</button>
+			</form>
+		</div> <!--fale_conosco-->
+
+		<div class="adicionais_contato"> 
+			Central de Reservas:<br>
+			(81) 3366-6601 / 3366.6602<br> 
+			Hotel: (81) 3619-1100<br>
+			Informações:<br>
+			faleconosco@dolphinhotel.tur.br<br>
+			<button onclick="rolar_para('#reserva')" class="btn1 left">Faça sua reserva</button>
+		</div>
+	</div> <!--content_contato-->
+</div> <!--container_contato-->
+
+<script type="text/javascript">
+$(document).ready(function() {   
+		$(".scroll").click(function(event){        
+	        event.preventDefault();
+	        $('html,body').animate({scrollTop:$(this.hash).offset().top}, 800);
+	   });
+	  function animateDivers() {
+		  setTimeout(function(){
+			  $('#seta').animate({'margin-top':'0px'},70).animate({'margin-top':'25px'},110, animateDivers); 
+			}, 800);	   
+	  }
+	  animateDivers();
+
+	  
+	}); 
+	
+</script>
+<?php require_once('rodape.php'); ?> <!--rodape-->
+

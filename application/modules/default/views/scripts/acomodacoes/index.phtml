@@ -1,0 +1,66 @@
+<?php require_once('head_internas.php'); ?> <!--head_internas-->
+<?php require_once('header_internas.php'); ?>
+
+<div class="content_title"  style="background-image:url(<?php echo $this->baseUrl("images/acomodacoes.jpg")?>)">
+	<figure class="img_title"><img src="<?php echo $this->baseUrl("images/ico_acomodacoes.png")?>"> </figure>
+	<h2> Acomodações </h2>
+</div>  <!--content_title-->
+<div id="seta">
+	<a href="#container_acomodacoes" class="scroll"><img src="<?php echo $this->baseUrl('/images/arrow_bottom.png')?>"></a>
+</div>
+<div class="container_acomodacoes" id="container_acomodacoes">
+	<div class="acomodacoes">
+	  <div class="img_acomodacao quarto1">
+	  	<a href="<?php echo $this->baseUrl("/acomodacoes/quarto/id/1")?>"><button class="btn_quarto"> standard </button></a>
+	  	<p> Faça a sua reserva ! </p>
+	  </div> <!-- quarto1-->
+
+	  <div class="img_acomodacao quarto2">
+	  	<a href="<?php echo $this->baseUrl("/acomodacoes/quarto/id/2")?>"><button class="btn_quarto"> compacto<br> <strong>vista Piscina </strong></button></a>
+	  	<p> Faça a sua reserva ! </p>
+	  </div>  <!-- quarto2-->
+
+	  <div class="img_acomodacao quarto3" style="margin-right:0">
+	  	<a href="<?php echo $this->baseUrl("/acomodacoes/quarto/id/3")?>"><button class="btn_quarto"> compacto<br> <strong>externo </strong> </button></a>
+	  	<p> Faça a sua reserva ! </p>
+	  </div> <!-- quarto3-->
+
+	  <div class="img_acomodacao quarto4">
+	  	<a href="<?php echo $this->baseUrl("/acomodacoes/quarto/id/4")?>"><button class="btn_quarto"> superior </button></a>
+	  	<p> Faça a sua reserva ! </p>
+	  </div><!-- quarto4-->
+
+	  <div class="img_acomodacao quarto5">
+	  	<a href="<?php echo $this->baseUrl("/acomodacoes/quarto/id/5")?>"><button class="btn_quarto"> superior<br> <strong>com hidro </strong></button></a>
+	  	<p> Faça a sua reserva ! </p>
+	  </div> <!-- quarto5-->
+	
+	  <div class="img_acomodacao quarto6"  style="margin-right:0">
+	  	<h1><strong>FERNANDO<br> DE NORONHA</strong></h1>
+	  	<h2>TE ESPERA.</h2>
+	  	<img src="<?php echo $this->baseUrl("/images/ico_barco.png")?>" style="margin:20px 0 20px 0">
+	  	<h1><a href="<?php echo $this->baseUrl("/reservas")?>">Faça sua reserva!</a></h1>
+	  </div>
+	 
+</div> <!--acomodacoes -->
+</div> <!-- container_acomodacoes -->
+<script type="text/javascript">
+$(document).ready(function() {   
+		$(".scroll").click(function(event){        
+	        event.preventDefault();
+	        $('html,body').animate({scrollTop:$(this.hash).offset().top}, 800);
+	   });
+	  function animateDivers() {
+		  setTimeout(function(){
+			  $('#seta').animate({'margin-top':'0px'},70).animate({'margin-top':'25px'},110, animateDivers); 
+			}, 800);	   
+	  }
+	  animateDivers();
+
+	  
+	}); 
+	
+</script>
+<?php require_once('rodape_reservas.php'); ?> <!--rodape_reservas-->
+<?php require_once('rodape.php'); ?> <!--rodape-->
+

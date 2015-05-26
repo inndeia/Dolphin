@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Admin - Dolphin Hotel</title>
+	
+	<script src="<?php echo $this->baseUrl('cms_novo/js/jquery.js'); ?>"></script>
+
+    <!-- this page specific scripts -->
+    <script type="text/javascript" src="<?php echo $this->baseUrl('cms_novo/js/noty/packaged/jquery.noty.packaged.min.js'); ?>"></script>
+	
+	<!-- bootstrap -->
+	<link href="<?php echo $this->baseUrl('cms_novo/css/bootstrap/bootstrap.css'); ?>" rel="stylesheet" />
+
+	<!-- libraries -->
+	<link href="<?php echo $this->baseUrl('cms_novo/css/libs/font-awesome.css'); ?>" type="text/css" rel="stylesheet" />
+
+	<!-- global styles -->
+	<link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl('cms_novo/css/compiled/layout.css'); ?>">
+	<link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl('cms_novo/css/compiled/elements.css'); ?>">
+	<link rel="stylesheet" href="<?php echo $this->baseUrl('cms_novo/css/libs/nanoscroller.css'); ?>" type="text/css" />
+
+	<!-- this page specific styles -->
+
+	<!-- google font libraries -->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300|Titillium+Web:200,300,400' rel='stylesheet' type='text/css'>
+	
+	<!-- Favicon -->
+	<link type="image/x-icon" href="favicon.png" rel="shortcut icon"/>
+
+	<!--[if lt IE 9]>
+		<script src="js/html5shiv.js"></script>
+		<script src="js/respond.min.js"></script>
+	<![endif]-->
+</head>
+<body id="login-page">
+		<?php
+        if(count($this->messages)){
+            foreach ($this->messages as $message){
+                echo "<script type=\"text/javascript\"> var n = noty({text: '$message'}); </script>";
+            }
+        }
+        ?>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12">
+				<div id="login-box">
+					<div class="row">
+						<div class="col-xs-12">
+							<header id="login-header">
+								<div id="login-logo" >
+									<div class="logo_site">
+										<img src="<?php echo $this->baseUrl('cms_novo/img/logo_dolpin.png'); ?>" alt="" />
+									</div>
+								</div>
+							</header>
+							<div id="login-box-inner">
+								<form role="form" method="post">
+									<div class="input-group">
+										<span class="input-group-addon"><i class="fa fa-user"></i></span>
+										<input class="form-control" type="email" name="email" placeholder="E-mail" required>
+									</div>
+									<div class="input-group">
+										<span class="input-group-addon"><i class="fa fa-key"></i></span>
+										<input type="password" class="form-control" name="password" placeholder="Senha" required>
+									</div>
+									<div id="remember-me-wrapper">
+										<div class="row">
+											<div class="col-xs-6">
+												<div class="checkbox-nice">
+													<input type="checkbox" id="remember-me" checked="checked" />
+													<label for="remember-me">
+														Salvar
+													</label>
+												</div>
+											</div>
+											<a href="<?php echo $this->baseUrl('admin/auth/esqueci-a-senha'); ?>" id="login-forget-link" class="col-xs-6">
+												Recuperar Senha
+											</a>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xs-12">
+											<button type="submit" class="btn btn-success col-xs-12">Entrar</button>
+										</div>
+									</div>
+<!-- 									<div class="row"> -->
+<!-- 										<div class="col-xs-12"> -->
+<!-- 											<p class="social-text">Or login with</p> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 									<div class="row"> -->
+<!-- 										<div class="col-xs-12 col-sm-6"> -->
+<!-- 											<button type="submit" class="btn btn-primary col-xs-12 btn-facebook"> -->
+<!-- 												<i class="fa fa-facebook"></i> facebook -->
+<!-- 											</button> -->
+<!-- 										</div> -->
+<!-- 										<div class="col-xs-12 col-sm-6"> -->
+<!-- 											<button type="submit" class="btn btn-primary col-xs-12 btn-twitter"> -->
+<!-- 												<i class="fa fa-twitter"></i> Twitter -->
+<!-- 											</button> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- global scripts -->
+	<script src="<?php echo $this->baseUrl('cms_novo/js/bootstrap.js'); ?>"></script>
+	
+	<!-- theme scripts -->
+	<script src="<?php echo $this->baseUrl('cms_novo/js/scripts.js'); ?>"></script>
+	<script src="<?php echo $this->baseUrl('cms_novo/js/jquery.nanoscroller.min.js'); ?>"></script>
+	
+</body>
+
+</html>

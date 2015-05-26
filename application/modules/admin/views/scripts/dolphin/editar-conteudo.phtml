@@ -1,0 +1,210 @@
+<div class="row">
+    <div class="col-lg-12">
+
+        <div class="row">
+            <div class="col-lg-12">
+                <ol class="breadcrumb">
+                    <li><a href="<?php echo $this->baseUrl('/admin'); ?>">Home</a></li>
+                    <?php
+                    foreach ($this->breadcrumb as $nome => $link) {
+                        echo '<li><a href="' . $this->baseUrl('/admin/dolphin/conteudo') . '">' . $nome . '</a></li>';
+                    }
+                    ?>  
+                </ol>
+                <div class="clearfix">
+                    <h1 class="pull-left">Editar <?php echo $this->title; ?></h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="main-box">
+                    <header class="main-box-header clearfix">
+                    </header>
+
+                    <div class="main-box-body clearfix">
+                        <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
+                            
+                            <div class="form-group">
+                                <label for="titulo" class="col-lg-2 control-label">Título*</label>
+                                <div class="col-lg-10">
+                                    <input type="text" name="titulo" class="form-control" id="titulo"  maxlength="90" required value="<?php echo utf8_encode($this->rs["titulo"])?>">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="descricao" class="col-lg-2 control-label">Descrição*</label>
+                                <div class="col-lg-10">
+                                	<textarea rows="" cols="" name="descricao" id="descricao" required maxlength="450" style="width: 891px; height: 169px;"><?php echo utf8_encode($this->rs["descricao"])?></textarea>
+                                </div>
+                            </div>
+                            <?php if($this->rs["id"] != 1){?>
+                            <div class="form-group">
+                                <label for="imagem" class="col-lg-2 control-label">Imagem</label>
+                                <div class="col-lg-10">
+	                              <input type="file" name="imagem" class="form-control" id="imagem" >
+                                    <p class="help-block">Formatos permitidos jpg, png, jpeg.</p>
+                                </div>
+                            </div>
+                            <?php }else{?>
+                            <div class="form-group">
+                                <label for="imagem" class="col-lg-2 control-label">Selecione um tipo:</label>
+                               	<div class="col-lg-5">
+                               			<button type="button" id="video" class="btn btn-primary ">Video</button>
+                               			<button type="button" id="image" class="btn btn-primary ">Imagem</button>
+                               </div>
+                            </div>
+							<div class="form-group" id="image1" style="display: none">
+                                <label for="imagem" class="col-lg-2 control-label">Imagem</label>
+                                <div class="col-lg-10">
+	                              <input type="file" name="imagem" class="form-control" id="imagem">
+                                    <p class="help-block">Formatos permitidos jpg, png, jpeg.</p>
+                                </div>
+                            </div>
+                            <div id="video1" style="display: none">
+	                            <div class="form-group"  >
+	                                <label for="video" class="col-lg-2 control-label">URL Video</label>
+	                                <div class="col-lg-8">
+		                              <input type="text" name="video" class="form-control" id="video" value="<?php echo $this->rs['video']?>">
+	                                </div>
+	                            </div>
+	                            <div class="form-group" >
+                                <label for="imagem_video" class="col-lg-2 control-label">Imagem do video</label>
+                                <div class="col-lg-10">
+	                              <input type="file" name="imagem_video" class="form-control" id="imagem_video">
+                                    <p class="help-block">Formatos permitidos jpg, png, jpeg.</p>
+                                </div>
+                            	</div>
+                            </div>
+                            <?php }?>
+                            <div class="form-group">
+                                <div class="col-lg-offset-2 col-lg-10">
+                                    <button type="submit" class="btn btn-success">Salvar</button>
+                                </div>
+                            </div>
+                            
+                        </form>
+                    </div>								
+                </div>
+            </div>	
+        </div>
+
+    </div>
+</div>
+<style>
+	#myModal .modal-dialog  {width:90%;}
+</style>
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <!--  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+        <h4 class="modal-title">Edição da imagem</h4>
+      </div>
+      <div class="modal-body" style="margin:0 auto">
+	      	<div id="div-jcrop">
+			</div>
+      </div>
+      <div class="modal-footer">
+        <!--<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>-->
+        <button type="button" class="btn btn-primary" id="btn-crop" onClick="javascript:btnCrop();">Cortar Imagem</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<script type="text/javascript" src="<?php echo $this->baseUrl('js/jquery.Jcrop.js');?>"></script>
+<script type="text/javascript">
+var img ;
+var widthPrev ;
+var heightPrev;
+var width = '<?php echo $this->rs["imgWidth"] ;?>';
+var height = '<?php echo $this->rs["imgHeight"] ;?>';
+                    
+	$('#upload').on('click', function() {
+	    var file_data = $('#file').prop('files')[0];   
+	    var form_data = new FormData();                  
+	    form_data.append('file', file_data);      
+	    $.ajax({
+	                url: '<?php echo $this->baseUrl('/admin/dolphin/salvarimagem');?>', // point to server-side PHP script 
+	                dataType: 'json',  // what to expect back from the PHP script, if anything
+	                cache: false,
+	                contentType: false,
+	                processData: false,
+	                data: form_data,                         
+	                type: 'post',
+	                success: function(response){	                	
+	                    img = response.nome;
+	                    widthPrev = response.imagesize[0];
+	                    heightPrev = response.imagesize[1];
+	                    $('#div-jcrop').html(response.img);
+	                    $('#imgUpload').hide();
+	                    $('#myModal').modal('show');
+	                    teste();
+	                    
+	                }
+	     });
+	});	
+
+function teste(){
+	$('#jcrop').Jcrop({
+		onChange: exibePreview,
+		onSelect: exibePreview,
+		minSize		: [ height, width ],
+		maxSize		: [ height, width ],
+		allowResize	: false,
+		addClass	: 'custom'
+	});
+}
+
+function btnCrop(){
+	$.ajax({
+	    url: '<?php echo $this->baseUrl('/admin/dolphin/crop');?>', // point to server-side PHP script 
+	    dataType: 'text',  // what to expect back from the PHP script, if anything
+	    data: {	img:img, 
+				x: $('#x').val(), 
+				y: $('#y').val(), 
+				w: $('#w').val(), 
+				h: $('#h').val()},                         
+	    type: 'post',
+	    success: function(response){        	
+	    	$('#myModal').modal('hide');
+	    	$('#imgCrop').html( '<img src="<?php echo $this->baseUrl('/');?>' + img + '?' + Math.random() + '" width="'+$('#w').val()+'" height="'+$('#h').val()+'" /><input type="hidden" name="imagem" value="' + img + '"/>' );
+	        
+	    }
+	});
+
+}
+												
+function exibePreview(c){
+	var rx = 100 / c.w;
+	var ry = 100 / c.h;
+														
+	$('#preview').css({
+		width: Math.round(rx * widthPrev ) + 'px',
+		height: Math.round(ry * heightPrev) + 'px',
+		marginLeft: '-' + Math.round(rx * c.x) + 'px',
+		marginTop: '-' + Math.round(ry * c.y) + 'px'
+	});
+
+	$('#x').val(c.x);
+	$('#y').val(c.y);
+	$('#x2').val(c.x2);
+	$('#y2').val(c.y2);
+	$('#w').val(c.w);
+	$('#h').val(c.h);
+															
+	};
+</script>
+<script type="text/javascript">
+$("#video").click(function(){
+        $('#video1').show();
+        $('#image1').hide();
+});
+
+$("#image").click(function(){
+    	$('#video1').hide();
+        $('#image1').show();
+});   
+
+</script>

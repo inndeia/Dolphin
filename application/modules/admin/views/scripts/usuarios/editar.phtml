@@ -1,0 +1,111 @@
+<div class="row">
+    <div class="col-lg-12">
+
+        <div class="row">
+            <div class="col-lg-12">
+                <ol class="breadcrumb">
+                    <li><a href="<?php echo $this->baseUrl('/admin'); ?>">Home</a></li>
+                    <?php
+                    foreach ($this->breadcrumb as $nome => $link) {
+                        echo '<li><a href="' . $this->baseUrl('/admin/usuarios') . '">' . $nome . '</a></li>';
+                    }
+                    ?>  
+                </ol>
+                <div class="clearfix">
+                    <h1 class="pull-left">Editar <?php echo $this->title; ?></h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="main-box">
+                    <header class="main-box-header clearfix">
+                    </header>
+
+                    <div class="main-box-body clearfix">
+                        <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
+                            
+                            <div class="form-group">
+                                <label for="name" class="col-lg-2 control-label">Nome</label>
+                                <div class="col-lg-10">
+                                    <input type="text" name="name" class="form-control" id="name" placeholder="Seu Nome Completo" maxlength="90" required value="<?php echo $this->rs["nome_completo"]?>">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email" class="col-lg-2 control-label">E-mail</label>
+                                <div class="col-lg-10">
+                                    <input type="email" name="email" class="form-control" id="email" placeholder="login@provedor.com" maxlength="60" required value="<?php echo $this->rs["email"]?>">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="passw" class="col-lg-2 control-label">Senha</label>
+                                <div class="col-lg-10">
+                                    <input type="password" name="passw" class="form-control" id="passw" maxlength="45">
+                                </div>
+                            </div>
+                           <!--   
+                            <div class="form-group form-group-select2">
+                                <label for="user_type_id" class="col-lg-2 control-label">Tipo de Usuário</label>
+                                <div class="col-lg-10">
+                                    <select id="sel2" name="user_type_id" class="select2-offscreen select-full" tabindex="-1" required>
+                                        <option value="">Selecione</option>
+                                         <?php
+                                         foreach ($this->usersTypes as $userType):
+                                            echo'<option value="' . $userType['id'] . '"';
+                                            if(in_array($userType['id'], $this->rs)){ echo ' selected="selected"'; }
+                                            echo '>' . $userType['user_type'] . '</option>';
+                                         endforeach;
+                                         ?>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Permissões</label>
+                                <div class="col-lg-10">
+                                    <?php foreach ($this->resources as $resource):?>
+                                    <div class="checkbox-nice">
+                                        <input 
+                                               type="checkbox" 
+                                               id="checkbox-<?php echo $resource["id"]?>" 
+                                               name="resources[]" 
+                                               value="<?php echo $resource["id"]?>" 
+                                               <?php if(in_array($resource['id'], $this->resoucesUser)){ echo ' checked'; }?>/>
+                                        <label for="checkbox-<?php echo $resource["id"]?>">
+                                            <?php echo $resource["resource"]?>
+                                        </label>
+                                    </div>
+                                    <?php endforeach;?>
+                                </div>
+                            </div> -->
+
+                            <div class="form-group">
+                                <div class="col-lg-offset-2 col-lg-10">
+                                    <button type="submit" class="btn btn-success">Salvar</button>
+                                </div>
+                            </div>
+                            
+                        </form>
+                    </div>								
+                </div>
+            </div>	
+        </div>
+
+    </div>
+</div>
+
+	
+<!-- this page specific scripts -->
+<script src="js/select2.min.js"></script>
+
+<!-- this page specific inline scripts -->
+<script>
+$(function($) {
+    //nice select boxes
+    $('#sel2').select2();
+});
+</script>
+	

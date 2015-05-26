@@ -1,0 +1,132 @@
+<?php require_once('head_internas.php'); ?> <!--head_internas-->
+<?php require_once('header_internas.php'); ?>
+<div class="content_title p_topo"  style="background-image:url(<?php echo $this->baseUrl($this->rs[0]['id'] == 5 ?'images/acomodacoes.png':'images/acomodacoes.jpg')?>)">
+	<figure class="img_title"><img src="<?php echo $this->baseUrl('images/ico_acomodacoes.png')?>"> </figure>
+	<h2> Acomodações </h2>
+	<span class="subtitle"> <?php echo $this->nome;?> </span>
+</div>  <!--content_title-->
+<div id="seta">
+	<a href="#content_conteudo1" class="scroll"><img src="<?php echo $this->baseUrl('/images/arrow_bottom.png')?>"></a>
+</div>
+<?php 
+	$count = count($this->destaque);
+	$img= array();
+	$img[0]='';
+	for($i=0;count($this->destaque) >$i; $i++){
+		$img[$i] = $this->destaque[$i]['imagem'];
+	}
+
+
+?>
+<?php if($this->id == 5){?>
+<div id="content_conteudo1" class="content_conteudo1 left"  style="height:680px;">
+		<iframe id="player" type="text/html" width="100%" height="680"
+				  src="http://www.youtube.com/embed/NusBy-C-Gmg?controls=0&showinfo=0"
+				  frameborder="0"></iframe>	
+	</div> <!--content_conteudo1-->
+
+<?php }else if($this->id == 3){?>
+	<div id="content_conteudo1" class="content_conteudo1 left"  style="height:680px;">
+		<iframe id="player" type="text/html" width="100%" height="680"
+				  src="http://www.youtube.com/embed/Oqv5RI5VOQE?controls=0&showinfo=0"
+				  frameborder="0"></iframe>	
+	</div> <!--content_conteudo1-->
+
+<?php }else{?>
+	<div class="content_conteudo1 left"  style="background-image:url(<?php echo $this->baseUrl($img[0])?>); height:680px;">
+</div> <!--content_conteudo1-->
+<?php }?>
+<div id="content_conteudo1" class="content_conteudo1 right" style="height:680px;">
+	<div class="conteudo padd_quartos">
+		<h3>  <?php echo $this->nome;?> </h3>
+		<p><?php echo utf8_encode($this->rs[0]['descricao']);?></p>
+		<a class="btn1" href="<?php echo $this->baseUrl("/reservas")?>"> faça sua reserva !</a>
+		<div style="clear: both;margin-bottom: 30px;"></div>
+		<div id="vlightbox1">
+		<?php for($i=0;count($this->galeria)>$i;$i++){
+					if($this->galeria[$i]['imagem'] != "" || $this->galeria[$i]['video'] != ""){
+						
+				
+			?>
+			<a class="fancybox-media" rel="galeria" href="<?php echo $this->galeria[$i]['imagem'] != ''?$this->baseUrl('/'.$this->galeria[$i]['imagem']) : $this->baseUrl('/'.$this->galeria[$i]['video'])?>" >
+				<img style="width:120px;height:120px" src="<?php echo $this->galeria[$i]['imagem'] != ''?$this->baseUrl('/'.$this->galeria[$i]['imagem']) : $this->baseUrl('/'.$this->galeria[$i]['imagem_video'])?>" alt="" />
+			</a>
+			
+		<?php 		}
+			}?>	
+<!-- 				<a class="vlightbox1" href="videos/restaurante.mp4" title="titulo"> -->
+<!-- 				<img src="images/0340.jpg"/></a>	 -->
+			</div>
+			<script type="text/javascript" src="<?php echo $this->baseUrl('/source/jquery.fancybox.js?v=2.1.5')?>"></script>
+			<script type="text/javascript" src="<?php echo $this->baseUrl('/source/helpers/jquery.fancybox-media.js?v=1.0.6')?>"></script>
+			<script type="text/javascript">
+			
+				$('.fancybox-media').fancybox({
+					openEffect  : 'none',
+					closeEffect : 'none',
+					helpers : {
+						media : true
+					}
+				});
+			</script>
+			
+<!-- 			<script src="index_files/vlb_engine/thumbscript1.js" type="text/javascript"></script> -->
+<!-- 			<script src="index_files/vlb_engine/vlbdata1.js" type="text/javascript"></script> -->
+<!-- End Galeria -->
+		</div>	
+</div> <!--content_conteudo1-->
+
+ <div class="container_descricao" style="background-image:url(<?php echo $this->baseUrl((array_key_exists('1',$img)?$img[1]:$img[0]))?>);">
+ 	<div class="content_descricao9">
+		<div class="content_descricao"> 
+			<div class="box_descricao1 left"> 
+				<h1> Descrição </h1>
+				<p>Conheça  os itens que fazem <br>
+				parte do quarto <?php echo $this->nome;?>.</p>
+				
+				<a class="btn1" href="<?php echo $this->baseUrl("/reservas")?>"> faça sua reserva !</a>
+			
+			</div> <!--box_descricao1-->
+		
+			<div class="box_descricao2 right"> 
+				<ul>
+					<?php foreach ($this->item as $item){?>
+						<li><?php echo $item['nome_item'];?></li>
+					<?php }?>
+				</ul>
+			</div> <!--box_descricao2-->
+		</div> <!--content_descricao-->
+	</div>
+</div> <!--content_descricao-->
+
+<div class="content_conteudo2 left">
+	<div class="conteudo right">
+		<h3>  estrutura </h3>
+		<p><?php echo utf8_encode($this->rs[1]['descricao']);?></p>
+		<a class="btn1" href="<?php echo $this->baseUrl("/reservas")?>"> faça sua reserva !</a>
+	</div>
+</div> <!--content_conteudo1-->
+
+
+<div class="content_conteudo2 right"  style="background-image:url(<?php echo $this->baseUrl((array_key_exists('2',$img)?$img[2]:$img[0]))?>); height:680px;">
+</div> <!--content_conteudo1-->
+<script type="text/javascript">
+$(document).ready(function() {   
+		$(".scroll").click(function(event){        
+	        event.preventDefault();
+	        $('html,body').animate({scrollTop:$(this.hash).offset().top}, 800);
+	   });
+	  function animateDivers() {
+		  setTimeout(function(){
+			  $('#seta').animate({'margin-top':'0px'},70).animate({'margin-top':'25px'},110, animateDivers); 
+			}, 800);	   
+	  }
+	  animateDivers();
+
+	  
+	}); 
+	
+</script>
+<?php require_once('rodape_reservas.php'); ?> <!--rodape_reservas-->
+<?php require_once('rodape.php'); ?> <!--rodape-->
+

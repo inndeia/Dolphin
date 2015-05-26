@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+	<meta charset="UTF-8">
+	<title>Dolphin Hotel</title>
+
+	<link rel="shortcut icon" type="image/x-icon" href="<?php echo $this->baseUrl('images/fav-icon.png')?>" />
+	<link href="<?php echo $this->baseUrl('css/style.css')?>" rel='stylesheet' type='text/css' />
+	<link href="<?php echo $this->baseUrl('css/slide.css')?>" rel='stylesheet' type='text/css' /><!-- Slide Home -->
+
+	<!-- Slide Home -->
+	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+	<!-- Slide Home -->
+	<script type="text/javascript" src="<?php echo $this->baseUrl('js/transit.js')?>"></script>
+	<script type="text/javascript" src="<?php echo $this->baseUrl('js/touchswipe.js')?>"></script>
+	<script type="text/javascript" src="<?php echo $this->baseUrl('js/jquery.simpleslider.js')?>"></script>
+	<script type="text/javascript" src="<?php echo $this->baseUrl('js/backstretch.js')?>"></script>
+	<script type="text/javascript" src="<?php echo $this->baseUrl('js/custom.js')?>"></script>
+</head>
+
+<body>
+	 <!--<video autoplay loop class="bg_video">
+		<source src="videos/bg.webm" type="video/webm">
+		<source src="videos/bg.mp4" type="video/mp4">
+	</video>-->
+
+	<!--O Vídeo Selecionado deve estar na pasta videos em 2 formatos (webm e mp4) , basta colocalos com nome (bg.webm e bg.mp4), depois basta tirar os comentários acima -->
+
+	<div id="container">
+		<header> 
+			<div class="content_bar"> 
+				<div class="bar_header"> 
+					<span class="bar_left"> 
+						<figure class="left m_right"> <a href="https://www.facebook.com/DolphinHotelNoronha" target="_black"><img src="<?php echo $this->baseUrl('images/ico_face.png');?>"> </a></figure>
+						<figure class="left m_right"> <a href="https://instagram.com/dolphinnoronha/" target="_black"><img src="<?php echo $this->baseUrl('images/ico_ig.png');?>"> </a></figure>
+						<figure class="left"> <a href="https://www.youtube.com/channel/UCZoTdgk4NVogjkRiyPNk6bA" target="_black"><img src="<?php echo $this->baseUrl('images/ico_you.png');?>"> </a></figure>
+					</span> <!-- bar_left-->
+					<span class="bar_center"> Central de Reservas: (81) 3366-6601 / 3366.6602 | Hotel: (81) 3619-1100  | <img src="<?php echo $this->baseUrl('images/whatsapp.png');?>"> (81) 9723-3101</span> <!--bar_center-->
+					<!--<span class="bar_right"> <strong>PT </strong>| EN </span>  bar_right -->
+				</div> <!--content_bar-->
+			</div> <!--bar_header -->
+
+			<?php require_once('menu.php'); ?> <!--menu--> <!--menu_header-->
+
+		</header> <!-- Header -->
+
+		<div class="container_slide">
+			<div class="content_slide"> 
+
+				<div class='pagewrap'>
+					<div class='pageblock' id='fullscreen'>
+						<div class='slider'>
+
+							<div class='slide' id="first">
+								<div class='slidecontent'>
+									<h1> BEM VINDO AO</h1>
+									<h2> DOLPHIN NORONHA</h2>
+								</div>
+							</div>
+							<div class='slide' id="sec">
+								<div class='slidecontent'>
+									<h2> O PARAÍSO É AQUI</h2>
+								</div>
+							</div>
+
+<!-- 							<div class='slide' id="sec"> -->
+<!-- 								<div class='slidecontent'> -->
+<!-- 									<h1>CONHEÇA NOSSOS</h1> -->
+<!-- 									<h2> PACOTES E TARIFAS </h2> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+
+<!-- 							<div class='slide' id="thirth"> -->
+<!-- 								<div class='slidecontent'> -->
+<!-- 									<h1> VAI CASAR ? </h1> -->
+<!-- 									<h2> CASE-SE EM NORONHA</h2> -->
+<!-- 							</div> -->
+
+						</div>
+					</div>
+				</div>
+
+			</div><!-- content_slide -->
+		</div>
+<!-- 		<div class="fundo_reservas_home"> -->
+<!-- 			<div class="reservas_internas"> -->
+<!-- 				<div class="content_reservas_internas"> -->
+<!-- 					<div class="texto_content_reservas"> -->
+<!-- 						<p>FAÇA A SUA<br><span> RESERVA</span></p><span class="senta_reservas"><img src="<?php //echo $this->baseUrl('images/arrow_reservas.png');?>"></span> -->
+<!-- 					</div> -->
+<!-- 					<form action="" method="post" > -->
+<!-- 						<input  class="input_resevas3" id="calendar-input3" placeholder="CHECK-IN" name="CheckIn"> -->
+<!-- 						<span class="calendar-icon3"></span> -->
+<!-- 						<input  class="input_resevas3" id="calendar-input4" placeholder="CHECK-OUT" name="CheckOut"> -->
+<!-- 						<span class="calendar-icon4"></span> -->
+<!-- 						<div class="select_resevas3"> -->
+<!-- 							<select class="" id="input_pessoas" name="ad"> -->
+<!-- 								<option value="">N° DE PESSOAS</option> -->
+<!-- 								<option value="1">1</option> -->
+<!-- 								<option value="2">2</option> -->
+<!-- 								<option value="3">3</option> -->
+<!-- 								<option value="4">4</option> -->
+<!-- 								<option value="5">5</option> -->
+<!-- 								<option value="6">6</option> -->
+<!-- 								<option value="7">7</option> -->
+<!-- 								<option value="8">8</option> -->
+<!-- 								<option value="9">9</option> -->
+<!-- 								<option value="10">10</option> -->
+<!-- 							</select> -->
+<!-- 						</div> -->
+<!--						<button class="btn_reserva_internas" onclick="javascript:enviarReserva();"> reservar </button> -->
+<!-- 					</form>	 -->
+<!-- 				</div>			 -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 		<script type="text/javascript"> -->
+		<!--
+// 			function enviarReserva(){
+// 				console.log('eeee')
+// 				var checkin = document.getElementById("calendar-input").value;
+// 				checkin = checkin.replace("/","");
+// 				checkin = checkin.replace("/","");
+// 				var checkout = document.getElementById("calendar-input2").value;
+// 				checkout = checkout.replace("/","");
+// 				checkout = checkout.replace("/","");
+// 				var pessoas = document.getElementById("input_pessoas").value;
+				
+// 				window.open('https://reservations.omnibees.com/default.aspx?q=4334&CheckIn='+checkin+'&CheckOut='+checkout+'&ad='+pessoas);
+// 			}
+-->
+<!-- 		</script>-->
+		<div id="footer_home"> 
+			<div class="content_nav_footer"> 
+				<ul> 
+					<li> 
+						<a href="<?php echo $this->baseUrl('/reservas'); ?>"> <h3><img src="<?php echo $this->baseUrl('images/ico_agenda.png');?>"> Faça sua <strong>reserva</strong> </h3></a>
+					</li>
+					<li> 
+					 	<a href="<?php echo $this->baseUrl('/acomodacoes'); ?>"><h3> <img src="<?php echo $this->baseUrl('images/ico_cama.png');?>"> Nossas <strong>acomodações</strong> </h3></a>
+					</li>
+					<li> 
+						<a href="https://instagram.com/noronhalovers" target="_black"><h3><img src="<?php echo $this->baseUrl('images/ico_ilha.png');?>"> Conheça <strong>Noronha</strong> <br>por Noronha Lovers</h3></a>
+					</li>
+				</ul>
+			</div> <!-- content_nav_footer -->
+			
+		</div> <!--footer_home -->
+
+	</div> <!-- container-->
+	
+</body>
+</html>

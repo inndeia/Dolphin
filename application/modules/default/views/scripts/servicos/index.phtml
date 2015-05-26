@@ -1,0 +1,85 @@
+<?php require_once('head_internas.php'); ?> <!--head_internas-->
+<?php require_once('header_internas.php'); ?>
+
+<div class="content_title"  style="background-image:url(images/servicos.jpg)">
+	<figure class="img_title"><img src="images/ico_servicos.png"> </figure>
+	<h2> Serviços & Passeios </h2>
+</div>  <!--content_title-->
+<div id="seta">
+	<a href="#content_conteudo2" class="scroll"><img src="<?php echo $this->baseUrl('/images/arrow_bottom.png')?>"></a>
+</div>
+<?php $lado= 'right';
+		$t = count($this->rs);
+	for($i=0;$t>$i;$i++){
+		$autoplay="";
+		?>
+		<div id="content_conteudo2" class="content_conteudo2 <?php echo $lado;?>" <?php echo $this->rs[$i]['imagem'] == '' ?'style="height:680px;"':''?>>
+			<div class="conteudo  <?php echo $lado == 'left'?'right':''?>">
+				<h3><?php echo utf8_encode($this->rs[$i]['titulo']);?></h3>
+				<p><?php echo utf8_encode($this->rs[$i]['descricao']);?></p>
+				<br>
+				<br>
+			<?php echo $this->rs[$i]['titulo'] == 'Eventos na Piscina'? '<a class="btn1" href="'.  $this->baseUrl("contatos") .'">Planeje seu evento</a>' : ''?>
+			</div>
+			
+			</div> <!--content_conteudo2-->
+			
+		<?php 
+		
+		if($this->rs[$i]['imagem'] == ''){?>
+			<div class="content_video <?php echo $lado == 'right'?'left':'right'?>"  style="background-image:url(<?php echo $this->baseUrl('/'.$this->rs[$i]['imagem_video']) ?>);">
+				<?php 
+				if(strripos($this->rs[$i]['video'], 'vimeo') != 0){
+							$autoplay = $this->rs[$i]['autoplayer'] == "1"?"?autoplay=1":"";
+							$exp = explode("/", $this->rs[$i]['video']);
+							$count= count($exp);
+							$exp = $exp[$count-1];
+							$video = "//player.vimeo.com/video/".$exp.$autoplay;
+						}else{
+							$autoplay = $this->rs[$i]['autoplayer'] == "1"?"&autoplay=1":"";
+							$exp = explode("?v=", $this->rs[$i]['video']);
+							$count= count($exp);
+							$exp = $exp[$count-1];
+							$video = "http://www.youtube.com/embed/".$exp."?controls=0&showinfo=0".$autoplay;
+								
+						}?>
+				 <iframe id="player" type="text/html" width="100%" height="680"
+				  src="<?php echo $video;?>"
+				  frameborder="0"></iframe>			
+				
+						
+			</div> <!--content_conteudo1-->
+			
+		<?php }else{?>
+				<div class="content_conteudo2 <?php echo $lado == 'right'?'left':'right'?>"  style="background-image:url(<?php echo $this->baseUrl('/'.$this->rs[$i]['imagem']) ?>)">
+				</div> <!--content_conteudo2-->
+		
+<?php 
+			}
+		if($lado == 'right'){
+			$lado = 'left';
+		}else{
+			$lado = 'right';
+		}
+	}
+?>
+<script type="text/javascript">
+$(document).ready(function() {   
+		$(".scroll").click(function(event){        
+	        event.preventDefault();
+	        $('html,body').animate({scrollTop:$(this.hash).offset().top}, 800);
+	   });
+	  function animateDivers() {
+		  setTimeout(function(){
+			  $('#seta').animate({'margin-top':'0px'},70).animate({'margin-top':'25px'},110, animateDivers); 
+			}, 800);	   
+	  }
+	  animateDivers();
+
+	  
+	}); 
+	
+</script>
+<?php require_once('rodape_reservas.php'); ?> <!--rodape_reservas-->
+<?php require_once('rodape.php'); ?> <!--rodape-->
+

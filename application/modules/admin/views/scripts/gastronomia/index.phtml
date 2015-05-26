@@ -1,0 +1,129 @@
+<div class="row">
+    <div class="col-lg-12">
+
+        <div class="row">
+            <div class="col-lg-12">
+                <ol class="breadcrumb">
+                    <li><a href="<?php echo $this->baseUrl('/admin'); ?>">Home</a></li>
+                    <?php
+                    foreach ($this->breadcrumb as $nome => $link) {
+                        echo '<li><a href="' . $this->baseUrl($link) . '">' . $nome . '</a></li>';
+                    }
+                    ?>  
+                </ol>
+
+                <div class="clearfix">
+                    <h1 class="pull-left"><?php echo $this->title; ?></h1>
+
+                    <div class="pull-right top-page-ui">
+                        <a href="<?php echo $this->baseUrl('/admin/gastronomia/adicionar'); ?>" class="btn btn-primary pull-right">
+                            <i class="fa fa-plus-circle fa-lg"></i> Adicionar <?php echo $this->title; ?>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="main-box no-header clearfix">
+                    <div class="main-box-body clearfix">
+                        <div class="table-responsive">
+                            <table class="table user-list">
+                                <thead>
+                                    <tr>
+                                        <th>Título</th>
+                                        <th>Descrição</th>
+                                        <th>Imagem/Video</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <?php
+                                    if ((count($this->rs) > 0) && ($this->rs != false)) {
+                                       
+                                        foreach ($this->rs as $rs){
+                                       		$rs['titulo'] = utf8_encode($rs['titulo']);
+                                        	$rs['descricao'] = utf8_encode($rs['descricao']);
+                                            if($rs['id'] == 1){
+                                        	?> 
+                                        		<tr>
+			                                    	<td><?php echo $rs['titulo']; ?></td>
+			                                    	<td><?php echo $rs['descricao']; ?></td>
+			                                    	<td>
+			                                    		<?php if($rs['imagem'] != '' || $rs['video'] != ''){?>
+			                                     			<a class="fancybox-media" href="<?php echo $rs['imagem'] != '' ?$this->baseUrl('/'.$rs['imagem']):$rs['video'] ?>" ><img style="width:100px;height:100px" src="<?php echo $rs['imagem'] != '' ?$this->baseUrl('/'.$rs['imagem']):$this->baseUrl('/'.$rs['imagem_video']); ?>" alt="" /></a>
+			                                       		<?php }?>
+			                                        </td>
+			                                        <td style="width: 9%">
+				                                 		<a href="<?php echo $this->baseUrl('/admin/gastronomia/editar/id/'.$rs['id'])?>" class="table-link">
+															<span class="fa-stack">
+																<i class="fa fa-square fa-stack-2x"></i>
+																<i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+															</span>
+														</a>
+														<a href="<?php echo $this->baseUrl('/admin/gastronomia/galeria/')?>" title="Galeria de imagens" class="table-link success" >
+															<span class="fa-stack">
+																<i class="fa fa-square fa-stack-2x"></i>
+																<i class="glyphicon glyphicon-picture fa-stack-1x fa-inverse"></i>
+															</span>
+														</a>
+			                            			</td>
+			                        			</tr>
+                                        	
+                                        	<?php }else{?>                                        
+                                            <tr>
+                                                
+                                                <td><?php echo $rs['titulo']; ?></td>
+                                                <td><?php echo $rs['descricao']; ?></td>
+                                                <td>
+                                                	<?php if($rs['imagem'] != '' || $rs['video'] != ''){?>
+                                                		<a class="fancybox-media" href="<?php echo $rs['imagem'] != '' ?$this->baseUrl('/'.$rs['imagem']):$rs['video'] ?>" ><img style="width:100px;height:100px" src="<?php echo $rs['imagem'] != '' ?$this->baseUrl('/'.$rs['imagem']):$this->baseUrl('/'.$rs['imagem_video']); ?>" alt="" /></a>
+                                                	<?php }?>
+                                                </td>
+                                                <td style="width: 9%">
+	                                                <a href="<?php echo $this->baseUrl('/admin/gastronomia/editar/id/'.$rs['id'])?>" class="table-link">
+														<span class="fa-stack">
+															<i class="fa fa-square fa-stack-2x"></i>
+															<i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+														</span>
+													</a>
+													<a href="<?php echo $this->baseUrl('/admin/gastronomia/remover/id/'.$rs['id'])?>" onclick="return confirm('Tem certeza que deseja apagar?')" class="table-link danger">
+														<span class="fa-stack">
+															<i class="fa fa-square fa-stack-2x"></i>
+															<i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+														</span>
+													</a>
+													
+                                                </td>
+                                            </tr>
+                                            <?php
+                                        	}
+                                        
+                                    	}
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                            <?php echo $this->paginationControl($this->rs, 'Sliding', '/paginacao/paginacao.phtml'); ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script type="text/javascript" src="<?php echo $this->baseUrl('/source/jquery.fancybox.js?v=2.1.5')?>"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl('source/helpers/jquery.fancybox-media.js?v=1.0.6')?>"></script>
+<script type="text/javascript">
+
+	$('.fancybox-media').fancybox({
+		openEffect  : 'none',
+		closeEffect : 'none',
+		helpers : {
+			media : {}
+		}
+	});
+</script>

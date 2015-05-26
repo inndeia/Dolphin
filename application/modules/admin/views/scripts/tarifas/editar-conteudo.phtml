@@ -1,0 +1,56 @@
+<div class="row">
+    <div class="col-lg-12">
+
+        <div class="row">
+            <div class="col-lg-12">
+                <ol class="breadcrumb">
+                    <li><a href="<?php echo $this->baseUrl('/admin'); ?>">Home</a></li>
+                    <?php
+                    foreach ($this->breadcrumb as $nome => $link) {
+                        echo '<li><a href="' . $this->baseUrl($link) . '">' . $nome . '</a></li>';
+                    }
+                    ?>  
+                </ol>
+                <div class="clearfix">
+                    <h1 class="pull-left">Editar Observações</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="main-box">
+                    <header class="main-box-header clearfix">
+                    </header>
+
+                    <div class="main-box-body clearfix">
+                        <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
+                            
+                          
+                            <div class="form-group">
+                                <label for="titulo" class="col-lg-2 control-label">Descrição das Observações*</label>
+                                <div class="col-lg-10">
+									<textarea id="editor1" name="texto" required><?php echo utf8_encode($this->rs['texto'])?></textarea>
+                            	</div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="col-lg-offset-2 col-lg-10">
+                                    <button type="submit" class="btn btn-success">Salvar</button>
+                                </div>
+                            </div>
+                            
+                        </form>
+                    </div>								
+                </div>
+            </div>	
+        </div>
+
+    </div>
+</div>
+<script type="text/javascript" src="<?php echo $this->baseUrl('/ckeditor/ckeditor.js')?>"></script>
+<script type="text/javascript">
+	CKEDITOR.replace( 'editor1',{
+		toolbar : 'MyToolbar'
+		} );
+</script>

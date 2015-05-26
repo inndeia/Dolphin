@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Dolphin Hotel - Reservas</title>
+	<style type="text/css">
+	.ReadMsgBody {
+		width: 100%;
+	}
+	
+	.ExternalClass {
+		width: 100%;
+	}
+	</style>
+</head>
+
+
+<body>
+
+<p>Formulario de reservas</p>
+<br />
+
+<p><b>Assunto: </b><?php echo $this->assunto;?></p>
+<br />
+<br />
+<?php if(!empty($this->checkin)){?>
+<p><b>Check-in:</b> <?php echo $this->checkin;?></p>
+<?php }?>
+<?php if(!empty($this->checkout)){?>
+<p><b>Check-out: </b><?php echo $this->checkout;?></p>
+<?php }?>
+<?php if(!empty($this->data)){?>
+<p><b>Data: </b><?php echo $this->data;?></p>
+<?php }?>
+<?php if(!empty($this->dataRetirada)){?>
+<p><b>Data Retirada: </b><?php echo $this->dataRetirada;?></p>
+<?php }?>
+<?php if(!empty($this->dataDevolucao)){?>
+<p><b>Data Devolução: </b><?php echo $this->dataDevolucao;?></p>
+<?php }?>
+
+<p><b>Nome: </b><?php echo $this->nome;?></p>
+<p><b>Email: </b><?php echo $this->email;?></p>
+<p><b>Telefone: </b><?php echo $this->telefone;?></p>
+<p><b>Mensagem: </b><?php echo $this->mensagem;?></p>
+<?php if(!empty($this->servico)){?>
+<p><b>Serviço: </b><?php echo $this->servico;?></p>
+<?php }?>
+<?php if(!empty($this->passeio)){?>
+<p><b>Passeio: </b><?php echo $this->passeio;?></p>
+<?php }?>
+<?php if(!empty($this->pacote)){?>
+<p><b>Pacote: </b><?php echo $this->pacote;?></p>
+<?php }?>
+<?php if(!empty($this->carro)){?>
+<p><b>Carro: </b><?php echo $this->carro;?></p>
+<?php }?>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<div class="row">
+    <div class="col-lg-12">
+
+        <div class="row">
+            <div class="col-lg-12">
+                <ol class="breadcrumb">
+                    <li><a href="<?php echo $this->baseUrl('/admin'); ?>">Home</a></li>
+                    <?php
+                    foreach ($this->breadcrumb as $nome => $link) {
+                        echo '<li><a href="' . $this->baseUrl($link) . '">' . $nome . '</a></li>';
+                    }
+                    ?>  
+                </ol>
+                <div class="clearfix">
+                    <h1 class="pull-left">Editar Pacote</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="main-box">
+                    <header class="main-box-header clearfix">
+                    </header>
+
+                    <div class="main-box-body clearfix">
+                        <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
+                            
+                            <div class="form-group">
+                                <label for="titulo" class="col-lg-2 control-label">Título</label>
+                                <div class="col-lg-10">
+                                    <input type="text" name="titulo" class="form-control" id="titulo"  maxlength="60" value="<?php echo utf8_encode($this->rs['titulo'])?>">
+                                </div>
+                            </div>
+                            <div class="form-group" >
+	                                <label for="periodo_pacote" class="col-lg-2 control-label">Período do pacote</label>
+	                               	<label class="radio-inline">De <input id="calendar-input" type="text" class="form-control" name="periodo_pacote_de" value="<?php echo $this->rs['periodo_pacote_de']?>"></label>
+									<label class="radio-inline">Até <input id="calendar-input2" type="text" class="form-control" name="periodo_pacote_ate" value="<?php echo $this->rs['periodo_pacote_ate']?>"></label>
+	                        </div>
+	                        <div class="form-group" >
+	                                <label for="validade_pacode" class="col-lg-2 control-label">Validade do pacote</label>
+	                               	<label class="radio-inline"><input id="calendar-input3" type="text" class="form-control" name="validade_pacote" value="<?php echo $this->rs['validade_pacote']?>"></label>
+	                        </div>
+                            <div class="form-group">
+                                <label for="titulo" class="col-lg-2 control-label">Descrição do pacote</label>
+                                <div class="col-lg-10">
+									<textarea id="editor1" name="texto"><?php echo utf8_encode($this->rs['texto'])?></textarea>
+                            	</div>
+                            </div>
+                             <div class="form-group">
+                                <label for="imagem" class="col-lg-2 control-label">Imagem*</label>
+                                <div class="col-lg-10">
+	                              <input type="file" name="imagem" class="form-control" id="imagem" >
+                                    <p class="help-block">Formatos permitidos jpg, png, jpeg. Tamanho 300px/300px</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="imagem_banner" class="col-lg-2 control-label">Imagem Banner*</label>
+                                <div class="col-lg-10">
+	                              <input type="file" name="imagem_banner" class="form-control" id="imagem_banner" >
+                                    <p class="help-block">Formatos permitidos jpg, png, jpeg. Tamanho 850px/334px</p>
+                                </div>
+                            </div>
+                            <div class="form-group" >
+                            		<?php 
+                            		$checkedSim ='';
+                            		$checkedNao='';
+                            		if($this->rs['imperdivel'] == 1){
+                            			$checkedSim = 'checked';
+                            		}else{
+                            			$checkedNao = 'checked';
+                            		}?>
+                            		
+	                                <label for="destaque" class="col-lg-2 control-label">Pacote imperdível*</label>
+	                               	<label class="radio-inline"><input type="radio" name="imperdivel" value='1' <?php echo $checkedSim;?>>Sim</label>
+									<label class="radio-inline"><input type="radio" name="imperdivel" value='0' <?php echo $checkedNao;?>>Não</label>
+	                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-offset-2 col-lg-10">
+                                    <button type="submit" class="btn btn-success">Salvar</button>
+                                </div>
+                            </div>
+                            
+                        </form>
+                    </div>								
+                </div>
+            </div>	
+        </div>
+
+    </div>
+</div>
+<script type="text/javascript" src="<?php echo $this->baseUrl('/ckeditor/ckeditor.js')?>"></script>
+<script type="text/javascript">
+	CKEDITOR.replace( 'editor1',{
+		toolbar : 'MyToolbar'
+		} );
+</script>
+<script src="<?php echo $this->baseUrl('src/datepickr.min.js'); ?>"></script>
+        <script>
+            // Regular datepickr
+            datepickr('#datepickr');
+
+            // Formato data
+            datepickr('.datepickr', { dateFormat: 'd/m/Y'});
+
+            // Min and max date
+            datepickr('#minAndMax', {
+                // few days ago
+                minDate: new Date().getTime() - 2.592e8,
+                // few days from now
+                maxDate: new Date().getTime() + 2.592e8
+            });
+
+            // datepickr on an icon, using altInput to store the value
+            // altInput must be a direct reference to an input element (for now)
+            datepickr('#calendar-input', { altInput: document.getElementById('calendar-input') });
+            datepickr('#calendar-input2', { altInput: document.getElementById('calendar-input2') });
+            datepickr('#calendar-input3', { altInput: document.getElementById('calendar-input3') });
+
+
+            // If the input contains a value, datepickr will attempt to run Date.parse on it
+            datepickr('[title="parseMe"]');
+
+            // Overwrite the global datepickr prototype
+            // Won't affect previously created datepickrs, but will affect any new ones
+            datepickr.prototype.l10n.months.shorthand = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dec'];
+            datepickr.prototype.l10n.months.longhand = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+            datepickr.prototype.l10n.weekdays.shorthand = ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sab'];
+            datepickr.prototype.l10n.weekdays.longhand = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sabado'];
+            datepickr('#someFrench.sil-vous-plait', { dateFormat: '\\le j F Y' });
+        </script>

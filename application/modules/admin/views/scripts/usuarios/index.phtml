@@ -1,0 +1,83 @@
+<div class="row">
+    <div class="col-lg-12">
+
+        <div class="row">
+            <div class="col-lg-12">
+                <ol class="breadcrumb">
+                    <li><a href="<?php echo $this->baseUrl('/admin'); ?>">Home</a></li>
+                    <?php
+                    foreach ($this->breadcrumb as $nome => $link) {
+                        echo '<li><a href="' . $this->baseUrl($link) . '">' . $nome . '</a></li>';
+                    }
+                    ?>  
+                </ol>
+
+                <div class="clearfix">
+                    <h1 class="pull-left"><?php echo $this->title; ?></h1>
+
+                    <div class="pull-right top-page-ui">
+                        <a href="<?php echo $this->baseUrl('/admin/usuarios/inserir'); ?>" class="btn btn-primary pull-right">
+                            <i class="fa fa-plus-circle fa-lg"></i> Adicionar <?php echo $this->title; ?>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="main-box no-header clearfix">
+                    <div class="main-box-body clearfix">
+                        <div class="table-responsive">
+                            <table class="table user-list">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Nome</th>
+                                        <th>Email</th>
+                                        <th>Data de Cadastro</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    if ((count($this->rs) > 0) && ($this->rs != false)) {
+                                        $i=1;
+                                        foreach ($this->rs as $rs):
+                                            ?>
+                                            <tr>
+                                                <td><?php echo $i; ?></td>
+                                                <td><?php echo $rs['nome_completo']; ?></td>
+                                                <td><?php echo $rs['email']; ?></td>
+                                                <td><?php echo $this->getDataHora($rs['criado']); ?></td>
+                                                <td>
+	                                                <a href="<?php echo $this->baseUrl('/admin/usuarios/editar/id/'.$rs['id'])?>" class="table-link">
+														<span class="fa-stack">
+															<i class="fa fa-square fa-stack-2x"></i>
+															<i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+														</span>
+													</a>
+													<a href="<?php echo $this->baseUrl('/admin/usuarios/delete/id/'.$rs['id'])?>" onclick="return confirm('Tem certeza que deseja apagar?')" class="table-link danger">
+														<span class="fa-stack">
+															<i class="fa fa-square fa-stack-2x"></i>
+															<i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+														</span>
+													</a>
+                                                </td>
+                                            </tr>
+                                            <?php
+                                                $i++;
+                                        endforeach;
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                            <?php echo $this->paginationControl($this->rs, 'Sliding', '/paginacao/paginacao.phtml'); ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

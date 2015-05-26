@@ -1,0 +1,193 @@
+<?php require_once('head_internas.php'); ?> <!--head_internas-->
+<?php require_once('header_internas.php'); ?>
+
+<div class="content_title"  style="background-image:url(images/gastronomia.png)">
+	<figure class="img_title"><img src="images/ico_gastro.png"> </figure>
+	<h2> Gastronomia </h2>
+</div>  <!--content_title-->
+<div id="seta">
+	<a href="#content_conteudo2" class="scroll"><img src="<?php echo $this->baseUrl('/images/arrow_bottom.png')?>"></a>
+</div>
+<?php $lado= 'right';
+		$t = count($this->rs);
+	for($i=0;$t>$i;$i++){
+		$autoplay="";
+		?>
+		
+		<?php if($this->rs[$i]['id'] == 29){?>
+			<div class="content_conteudo2 <?php echo $lado;?>" <?php echo $this->rs[$i]['imagem'] == '' ?'style="height:680px;"':''?>>
+			<div class="conteudo  <?php echo $lado == 'left'?'right':''?>">
+				<h3><?php echo utf8_encode($this->rs[$i]['titulo']);?></h3>
+				<p><?php echo utf8_encode($this->rs[$i]['descricao']);?>TTTTTTTTTTTTT</p>
+				<a class="btn1" href="<?php echo $this->baseUrl("/reservas")?>"> faça sua reserva !</a>
+			</div>
+			
+		</div> <!--content_conteudo2-->
+			
+		<?php if($this->rs[$i]['imagem'] == ''){?>
+			<div class="content_video <?php echo $lado == 'right'?'left':'right'?>"  style="background-image:url(<?php echo $this->baseUrl('/'.$this->rs[$i]['imagem_video']) ?>);">
+				<?php 
+				if(strripos($this->rs[$i]['video'], 'vimeo') != 0){
+							$autoplay = $this->rs[$i]['autoplayer'] == "1"?"?autoplay=1":"";
+							$exp = explode("/", $this->rs[$i]['video']);
+							$count= count($exp);
+							$exp = $exp[$count-1];
+							$video = "//player.vimeo.com/video/".$exp.$autoplay;
+						}else{
+							$autoplay = $this->rs[$i]['autoplayer'] == "1"?"&autoplay=1":"";
+							$exp = explode("?v=", $this->rs[$i]['video']);
+							$count= count($exp);
+							$exp = $exp[$count-1];
+							$video = "http://www.youtube.com/embed/".$exp."?controls=0&showinfo=0".$autoplay;
+								
+						}?>
+				 <iframe id="player" type="text/html" width="100%" height="680"
+				  src="<?php echo $video;?>"
+				  frameborder="0"></iframe>			
+				
+						
+			</div> <!--content_conteudo1-->
+			
+		<?php }else{?>
+				<div class="content_conteudo2 <?php echo $lado == 'right'?'left':'right'?>"  style="background-image:url(<?php echo $this->baseUrl('/'.$this->rs[$i]['imagem']) ?>)">
+				</div> <!--content_conteudo2-->
+			
+	<?php  
+			}
+		}else if($this->rs[$i]['id'] == 1){?>
+		<div id="content_conteudo2" class="content_conteudo2 <?php echo $lado;?>" <?php echo $this->rs[$i]['imagem'] == '' ?'style="height:680px;"':''?>>
+			<div class="conteudo  <?php echo $lado == 'left'?'right':''?>">
+				<h3><?php echo utf8_encode($this->rs[$i]['titulo']);?></h3>
+				<p><?php echo utf8_encode($this->rs[$i]['descricao']);?></p>
+						<div id="vlightbox1">
+		<?php for($j=0;count($this->galeria)>$j;$j++){
+					if($this->galeria[$j]['imagem'] != "" || $this->galeria[$j]['video'] != ""){
+						
+				
+			?>
+			<a class="fancybox-media" rel="galeria" href="<?php echo $this->galeria[$j]['imagem'] != ''?$this->baseUrl('/'.$this->galeria[$j]['imagem']) : $this->baseUrl('/'.$this->galeria[$j]['video'])?>" ><img style="width:120px;height:120px" src="<?php echo $this->galeria[$j]['imagem'] != ''?$this->baseUrl('/'.$this->galeria[$j]['imagem']) : $this->baseUrl('/'.$this->galeria[$j]['imagem_video'])?>" alt="" /></a>
+			
+		<?php 		}
+			}?>	
+<!-- 				<a class="vlightbox1" href="videos/restaurante.mp4" title="titulo"> -->
+<!-- 				<img src="images/0340.jpg"/></a>	 -->
+				</div>
+			</div>
+			
+		</div> <!--content_conteudo2-->
+			
+		<?php if($this->rs[$i]['imagem'] == ''){?>
+			<div class="content_video <?php echo $lado == 'right'?'left':'right'?>"  style="background-image:url(<?php echo $this->baseUrl('/'.$this->rs[$i]['imagem_video']) ?>);">
+				<?php 
+				if(strripos($this->rs[$i]['video'], 'vimeo') != 0){
+							$autoplay = $this->rs[$i]['autoplayer'] == "1"?"?autoplay=1":"";
+							$exp = explode("/", $this->rs[$i]['video']);
+							$count= count($exp);
+							$exp = $exp[$count-1];
+							$video = "//player.vimeo.com/video/".$exp.$autoplay;
+						}else{
+							$autoplay = $this->rs[$i]['autoplayer'] == "1"?"&autoplay=1":"";
+							$exp = explode("?v=", $this->rs[$i]['video']);
+							$count= count($exp);
+							$exp = $exp[$count-1];
+							$video = "http://www.youtube.com/embed/".$exp."?controls=0&showinfo=0".$autoplay;
+								
+						}?>
+				 <iframe id="player" type="text/html" width="100%" height="680"
+				  src="<?php echo $video;?>"
+				  frameborder="0"></iframe>			
+				
+						
+			</div> <!--content_conteudo1-->
+			
+			
+			
+		<?php }else{?>
+				<div class="content_conteudo2 <?php echo $lado == 'right'?'left':'right'?>"  style="background-image:url(<?php echo $this->baseUrl('/'.$this->rs[$i]['imagem']) ?>)">
+				</div> <!--content_conteudo2-->
+		
+		
+		
+		<?php 
+		
+			}
+		}else{?>
+		<div class="content_conteudo2 <?php echo $lado;?>" <?php echo $this->rs[$i]['imagem'] == '' ?'style="height:680px;"':''?>>
+			<div class="conteudo  <?php echo $lado == 'left'?'right':''?>">
+				<h3><?php echo utf8_encode($this->rs[$i]['titulo']);?></h3>
+				<p><?php echo utf8_encode($this->rs[$i]['descricao']);?></p>
+				<a class="btn1" href="<?php echo $this->baseUrl("/reservas")?>"> faça sua reserva !</a>
+			</div>
+			
+		</div> <!--content_conteudo2-->
+			
+		<?php if($this->rs[$i]['imagem'] == ''){?>
+			<div class="content_video <?php echo $lado == 'right'?'left':'right'?>"  style="background-image:url(<?php echo $this->baseUrl('/'.$this->rs[$i]['imagem_video']) ?>);">
+				<?php 
+				if(strripos($this->rs[$i]['video'], 'vimeo') != 0){
+							$autoplay = $this->rs[$i]['autoplayer'] == "1"?"?autoplay=1":"";
+							$exp = explode("/", $this->rs[$i]['video']);
+							$count= count($exp);
+							$exp = $exp[$count-1];
+							$video = "//player.vimeo.com/video/".$exp.$autoplay;
+						}else{
+							$autoplay = $this->rs[$i]['autoplayer'] == "1"?"&autoplay=1":"";
+							$exp = explode("?v=", $this->rs[$i]['video']);
+							$count= count($exp);
+							$exp = $exp[$count-1];
+							$video = "http://www.youtube.com/embed/".$exp."?controls=0&showinfo=0".$autoplay;
+								
+						}?>
+				 <iframe id="player" type="text/html" width="100%" height="680"
+				  src="<?php echo $video;?>"
+				  frameborder="0"></iframe>			
+				
+						
+			</div> <!--content_conteudo1-->
+			
+		<?php }else{?>
+				<div class="content_conteudo2 <?php echo $lado == 'right'?'left':'right'?>"  style="background-image:url(<?php echo $this->baseUrl('/'.$this->rs[$i]['imagem']) ?>)">
+				</div> <!--content_conteudo2-->
+		
+<?php 
+			}
+		}
+		if($lado == 'right'){
+			$lado = 'left';
+		}else{
+			$lado = 'right';
+		}
+	}
+?>
+<script type="text/javascript" src="<?php echo $this->baseUrl('/source/jquery.fancybox.js?v=2.1.5')?>"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl('/source/helpers/jquery.fancybox-media.js?v=1.0.6')?>"></script>
+<script type="text/javascript">
+
+	$('.fancybox-media').fancybox({
+		openEffect  : 'none',
+		closeEffect : 'none',
+		helpers : {
+			media : {}
+		}
+	});
+	</script>
+<script type="text/javascript">
+$(document).ready(function() {   
+		$(".scroll").click(function(event){        
+	        event.preventDefault();
+	        $('html,body').animate({scrollTop:$(this.hash).offset().top}, 800);
+	   });
+	  function animateDivers() {
+		  setTimeout(function(){
+			  $('#seta').animate({'margin-top':'0px'},70).animate({'margin-top':'25px'},110, animateDivers); 
+			}, 800);	   
+	  }
+	  animateDivers();
+
+	  
+	}); 
+	
+</script>
+<?php require_once('rodape_reservas.php'); ?> <!--rodape_reservas-->
+<?php require_once('rodape.php'); ?> <!--rodape-->
+

@@ -1,0 +1,125 @@
+<div class="row">
+    <div class="col-lg-12">
+
+        <div class="row">
+            <div class="col-lg-12">
+                <ol class="breadcrumb">
+                    <li><a href="<?php echo $this->baseUrl('/admin'); ?>">Home</a></li>
+                    <?php
+                    foreach ($this->breadcrumb as $nome => $link) {
+                        echo '<li><a href="' . $this->baseUrl('/admin/servicos') . '">' . $nome . '</a></li>';
+                    }
+                    ?>  
+                </ol>
+                <div class="clearfix">
+                    <h1 class="pull-left">Editar <?php echo $this->title; ?></h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="main-box">
+                    <header class="main-box-header clearfix">
+                    </header>
+
+                    <div class="main-box-body clearfix">
+                        <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
+                            
+                            <div class="form-group">
+                                <label for="titulo" class="col-lg-2 control-label">Título</label>
+                                <div class="col-lg-10">
+                                    <input type="text" name="titulo" class="form-control" id="titulo"  maxlength="40" required value="<?php echo utf8_encode($this->rs["titulo"])?>">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group" >
+                                <label for="tipo" class="col-lg-2 control-label">Tipo*</label>
+                               	<label class="radio-inline"><input type="radio" name="tipo" value='1' <?php echo $this->rs["tipo"] == 1? 'checked': ''?>>Passeio</label>
+								<label class="radio-inline"><input type="radio" name="tipo" value='0' <?php echo $this->rs["tipo"] == 0? 'checked': ''?>>Serviço</label>
+                            </div>   
+
+                            <div class="form-group">
+                                <label for="descricao" class="col-lg-2 control-label">Descrição</label>
+                                <div class="col-lg-10">
+                                	<textarea id="editor1" name="descricao" ><?php echo utf8_encode($this->rs["descricao"])?></textarea>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="imagem" class="col-lg-2 control-label">Selecione um tipo:</label>
+                               	<div class="col-lg-5">
+                               			<button type="button" id="video" class="btn btn-primary ">Video</button>
+                               			<button type="button" id="image" class="btn btn-primary ">Imagem</button>
+                               </div>
+                            </div>
+                             <div class="form-group" id="image1" style="display: none">
+                                <label for="imagem" class="col-lg-2 control-label">Imagem</label>
+                                <div class="col-lg-10">
+	                              <input type="file" name="imagem" class="form-control" id="imagem">
+                                    <p class="help-block">Formatos permitidos jpg, png, jpeg.</p>
+                                </div>
+                            </div>
+                            <div id="video1" style="display: none">
+	                            <div class="form-group"  >
+	                                <label for="video" class="col-lg-2 control-label">URL Video</label>
+	                                <div class="col-lg-8">
+		                              <input type="text" name="video" class="form-control" id="video" value="<?php echo $this->rs['video']?>">
+	                                </div>
+	                            </div>
+	                            <div class="form-group" >
+                                <label for="imagem_video" class="col-lg-2 control-label">Imagem do video</label>
+                                <div class="col-lg-10">
+	                              <input type="file" name="imagem_video" class="form-control" id="imagem_video">
+                                    <p class="help-block">Formatos permitidos jpg, png, jpeg.</p>
+                                </div>
+                            	</div>   
+                            	<div class="form-group" >
+                            		<?php 
+                            		$checkedSim ='';
+                            		$checkedNao='';
+                            		if($this->rs['autoplayer'] == 1){
+                            			$checkedSim = 'checked';
+                            		}else{
+                            			$checkedNao = 'checked';
+                            		}?>
+                            		
+	                                <label for="autoplayer" class="col-lg-2 control-label">AutoPlayer</label>
+	                               	<label class="radio-inline"><input type="radio" name="autoplayer" value='1' <?php echo $checkedSim;?>>Sim</label>
+									<label class="radio-inline"><input type="radio" name="autoplayer" value='0' <?php echo $checkedNao;?>>Não</label>
+	                            </div>                           
+                            </div>
+                           
+                            <div class="form-group">
+                                <div class="col-lg-offset-2 col-lg-10">
+                                    <button type="submit" class="btn btn-success">Salvar</button>
+                                </div>
+                            </div>
+                            
+                        </form>
+                    </div>								
+                </div>
+            </div>	
+        </div>
+
+    </div>
+</div>
+<script type="text/javascript" src="<?php echo $this->baseUrl('/ckeditor/ckeditor.js')?>"></script>
+<script type="text/javascript">
+	CKEDITOR.replace( 'editor1',{
+		toolbar : 'MyToolbar'
+		} );
+</script>
+<script type="text/javascript">
+$("#video").click(function(){
+        $('#video1').show();
+        $('#image1').hide();
+});
+
+$("#image").click(function(){
+    	$('#video1').hide();
+        $('#image1').show();
+});   
+
+</script>
+	

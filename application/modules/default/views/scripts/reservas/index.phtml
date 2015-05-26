@@ -1,0 +1,268 @@
+<?php require_once('head_internas.php'); ?> <!--head_internas-->
+<?php require_once('header_internas.php'); ?>
+
+<div class="content_title"  style="background-image:url(<?php echo $this->baseUrl('/images/contato.jpg'); ?>)">
+	<figure class="img_title"><img src="<?php echo $this->baseUrl('/images/ico_contato.png'); ?>"> </figure>
+	<h2> Reservas </h2>
+</div>  <!--content_title-->
+<div id="seta">
+	<a href="#conteudo_reservas" class="scroll"><img src="<?php echo $this->baseUrl('/images/arrow_bottom.png')?>"></a>
+</div>
+<div class="container_reservas_interna"> 
+	<div class="conteudo_reservas" id="conteudo_reservas"> 
+		<h1> O que você deseja reservar? </h1>
+	<div class="content_agendamento"> 
+			<ul>
+				<li><button class="btn3" id="btn_hospedagem"> HOSPEDAGEM </button></li>
+				<li><button class="btn3" id="btn_pacotes"> PACOTES </button></li>
+				<li><button class="btn3" id="btn_servicos"> SERVIÇOS </button></li>
+				<li><button class="btn3" id="btn_passeios"> PASSEIOS </button></li>
+				<li><button class="btn3" id="btn_aluguel"> ALUGUEL DE 4x4 </button></li>
+			</ul>
+		</div> <!--content_agendamento-->
+			<div id="form_hospedagem" >
+				
+			</div>
+			<div  id="form_pacotes" style="height: 650px;">	
+				<form method="post" action="<?php echo $this->baseUrl('/reservas/enviaremail'); ?>">
+					<input type="hidden" value="1" name="reserva"/>	
+					<div class="reservas_form left">
+						<label> Check-in:* </label>
+						<input  class="input_resevas" id="calendar-input" name="checkin" value="" required>
+						<span class="calendar-icon"></span>
+						<label> Nome:* </label>
+						<input type="text" name="nome" required>
+						<label> E-mail:* </label>
+						<input type="email" name="email" required>
+						<label> Telefone:* </label>
+						<input type="text" name="telefone" required>
+					</div>
+					<div class="reservas_form right">
+						<label> Check-out:* </label>
+						
+						<input  class="input_resevas" id="calendar-input2" name="checkout" value="" required>
+						<span class="calendar-icon2"></span>
+						<label> Pacotes:* </label>
+						<select name="pacotes" required>
+							<option value="">Selecione..</option>
+						<?php foreach ($this->pacotes as $pacote){?>
+							<option value="<?php echo $pacote['id']?>"><?php echo utf8_encode($pacote['titulo'])?></option>
+						<?php }?>
+						</select>
+						<label> Mensagem: </label>
+						<textarea name="mensagem"></textarea>
+						<button class="btn2 left m_btn" type="submit"> RESERVAR </button>
+					</div>
+				</form>
+			</div>
+			<div id="form_servicos" style="height: 650px;">
+				<form method="post" action="<?php echo $this->baseUrl('/reservas/enviaremail'); ?>">
+					<input type="hidden" value="2" name="reserva"/>	
+					<div class="reservas_form left">
+						<label> Data:* </label>
+						<input  class="input_resevas" id="calendar-input9" name="data" value="" required>
+						<span class="calendar-icon9"></span>
+						<label> Nome:* </label>
+						<input type="text" name="nome" required>
+						<label> E-mail:* </label>
+						<input type="email" name="email" required>
+						<label> Telefone:* </label>
+						<input type="text" name="telefone" required>
+					</div>
+					<div class="reservas_form right">
+						<label> Serviços:* </label>
+						<select name="servicos" required>
+							<option value="">Selecione..</option>
+						<?php foreach ($this->servicos as $servico){?>
+							<option value="<?php echo $servico['id']?>"><?php echo utf8_encode($servico['titulo'])?></option>
+						<?php }?>
+						</select>
+						<label > Mensagem: </label>
+						<textarea name="mensagem"></textarea>
+						<button class="btn2 left m_btn" type="submit"> RESERVAR </button>
+					</div>
+				</form>
+			</div>
+			<div id="form_passeios" style="height: 650px;">
+				<form method="post" action="<?php echo $this->baseUrl('/reservas/enviaremail'); ?>">
+					<input type="hidden" value="3" name="reserva"/>	
+					<div class="reservas_form left">
+						<label> Data:* </label>
+						<input  class="input_resevas" id="calendar-input8" name="data" value="" required>
+						<span class="calendar-icon8"></span>
+						<label> Nome:* </label>
+						<input type="text" name="nome" required>
+						<label> E-mail:* </label>
+						<input type="email" name="email" required>
+						<label> Telefone:* </label>
+						<input type="text" name="telefone" required>
+					</div>
+					<div class="reservas_form right">
+						<label> Passeios:* </label>
+						<select name="passeios" required>
+							<option value="">Selecione..</option>
+						<?php foreach ($this->passeios as $passeio){?>
+							<option value="<?php echo $passeio['id']?>"><?php echo utf8_encode($passeio['titulo'])?></option>
+						<?php }?>
+						</select>
+						<label > Mensagem: </label>
+						<textarea name="mensagem"></textarea>
+						<button class="btn2 left m_btn" type="submit"> RESERVAR </button>
+					</div>
+				</form>
+			</div>
+			<div id="form_aluguel" style="height: 650px;">
+				<form method="post" action="<?php echo $this->baseUrl('/reservas/enviaremail'); ?>">
+					<input type="hidden" value="4" name="reserva"/>	
+					<div class="reservas_form left">
+						<label> Data retirada:* </label>
+						<input  class="input_resevas" id="calendar-input6" name="dataRetirada" value="" required>
+						<span class="calendar-icon6"></span>
+						<label> Nome:* </label>
+						<input type="text" name="nome" required>
+						<label> E-mail:* </label>
+						<input type="email" name="email" required>
+						<label> Telefone:* </label>
+						<input type="text" name="telefone" required>
+					</div>
+					<div class="reservas_form right">
+						<label> Data devolução:* </label>						
+						<input  class="input_resevas" id="calendar-input7" name="dataDevolucao" value="" required>
+						<span class="calendar-icon7"></span>
+						<label> Carro:* </label>
+						<select name="carro" required>
+							<option value="">Selecione..</option>						
+							<option value="jimmy">Jimmy</option>
+							<option value="tr4">TR4</option>
+						</select>
+						<label > Mensagem: </label>
+						<textarea name="mensagem"></textarea>
+						<button class="btn2 left m_btn" type="submit"> RESERVAR </button>
+					</div>
+				</form>
+			</div>
+			 
+
+			
+
+		      <!--reservas_form-->
+
+		     <h1> Vôos diários </h1>
+
+		     <table class="tg tb_reservas">
+				  <tr>
+				    <th class="tg-gatd"> PARTIDA </th>
+				    <th class="tg-gatd"> LINHA AÉREA </th>
+				    <th class="tg-gatd" style="border-right:solid 1px #9c9c9c;"> DESCRIÇÃO </th>
+				  </tr>
+				  <tr>
+				    <td class="tg-x6se">Recife(PE)</td>
+				    <td class="tg-x6se"> Azul e Gol </td>
+				    <td class="tg-x6se"> 2 Vôos diários + 1 Vôo Extra entre Novembro e Janeiro</td>
+				  </tr>
+				  <tr>
+				    <td class="tg-x6se">Natal(RN)</td>
+				    <td class="tg-x6se">Azul</td>
+				    <td class="tg-x6se">Vôo Diário</td>
+				  </tr>
+			</table>
+
+
+	</div> <!--conteudo_reservas-->
+</div> <!--container_reservas_interna-->
+<script type="text/javascript">
+	$('#btn_pacotes').click(function(){
+		$('#form_pacotes').show();
+		$('#form_servicos').hide();
+		$('#form_passeios').hide();
+		$('#form_aluguel').hide();
+		$('#form_hospedagem').hide();
+		
+		$(this).addClass('active_btn');
+		$('#btn_servicos').removeClass('active_btn');
+		$('#btn_passeios').removeClass('active_btn');
+		$('#btn_aluguel').removeClass('active_btn');
+		$('#btn_hospedagem').removeClass('active_btn');
+		
+
+	});
+	$('#btn_servicos').click(function(){
+		$('#form_servicos').show();
+
+		$('#form_pacotes').hide();
+		$('#form_passeios').hide();
+		$('#form_aluguel').hide();
+		$('#form_hospedagem').hide();
+		
+		$(this).addClass('active_btn');
+		$('#btn_pacotes').removeClass('active_btn');
+		$('#btn_passeios').removeClass('active_btn');
+		$('#btn_aluguel').removeClass('active_btn');
+		$('#btn_hospedagem').removeClass('active_btn');
+
+	});
+	$('#btn_passeios').click(function(){
+		$('#form_passeios').show();
+		$('#form_pacotes').hide()
+		$('#form_servicos').hide();
+		$('#form_aluguel').hide();
+		$('#form_hospedagem').hide();
+		
+		$(this).addClass('active_btn');
+		$('#btn_servicos').removeClass('active_btn');
+		$('#btn_pacotes').removeClass('active_btn');
+		$('#btn_aluguel').removeClass('active_btn');
+		$('#btn_hospedagem').removeClass('active_btn');
+
+	});
+	$('#btn_aluguel').click(function(){
+		$('#form_aluguel').show();
+		$('#form_pacotes').hide();
+		$('#form_servicos').hide();
+		$('#form_passeios').hide();
+		$('#form_hospedagem').hide();
+		
+		$(this).addClass('active_btn');
+		$('#btn_servicos').removeClass('active_btn');
+		$('#btn_passeios').removeClass('active_btn');
+		$('#btn_pacotes').removeClass('active_btn');
+		$('#btn_hospedagem').removeClass('active_btn');
+
+	});
+	$('#btn_hospedagem').click(function(){
+		$('#form_hospedagem').show();
+		$('#form_pacotes').hide();
+		$('#form_servicos').hide();
+		$('#form_passeios').hide();
+		$('#form_aluguel').hide();
+		
+		$(this).addClass('active_btn');
+		$('#btn_servicos').removeClass('active_btn');
+		$('#btn_passeios').removeClass('active_btn');
+		$('#btn_aluguel').removeClass('active_btn');
+		$('#btn_pacotes').removeClass('active_btn');
+
+		window.open('https://reservations.omnibees.com/default.aspx?q=4334');
+
+	});
+</script>
+<script type="text/javascript">
+$(document).ready(function() {   
+		$(".scroll").click(function(event){        
+	        event.preventDefault();
+	        $('html,body').animate({scrollTop:$(this.hash).offset().top}, 800);
+	   });
+	  function animateDivers() {
+		  setTimeout(function(){
+			  $('#seta').animate({'margin-top':'0px'},70).animate({'margin-top':'25px'},110, animateDivers); 
+			}, 800);	   
+	  }
+	  animateDivers();
+
+	  
+	}); 
+	
+</script>
+<?php require_once('rodape_reservas.php'); ?> <!--rodape_reservas-->
+<?php require_once('rodape.php'); ?> <!--rodape-->
+
