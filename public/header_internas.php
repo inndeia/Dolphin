@@ -16,6 +16,7 @@
 			<?php require_once('menu.php'); ?> <!--menu-->
 
 		</header> <!-- Header -->
+		<div style="display: none">
 		<div class="reservas_internas">
 			<div class="content_reservas_internas">
 				<div class="texto_content_reservas">
@@ -59,3 +60,4 @@
 			}
 
 		</script>
+		</div>
